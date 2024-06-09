@@ -26,13 +26,25 @@ abstract class BaseActivity<VB : ViewBinding>(
         Log.i(TAG, "onCreate: ")
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(binding.root)
+        initializing()
+        uiConfig()
         listeners()
         observers()
+    }
+
+
+    open fun initializing(){
+        Log.i(TAG, "initializing: ")
+    }
+
+    open fun uiConfig(){
+        Log.i(TAG, "uiConfig: ")
     }
 
     open fun listeners(){
         Log.i(TAG, "listeners: ")
     }
+
     open fun observers(){
         Log.i(TAG, "observers: ")
     }

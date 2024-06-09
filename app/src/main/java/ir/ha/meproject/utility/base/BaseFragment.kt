@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import ir.ha.meproject.utility.ui.SnackBarUtils
 import ir.ha.meproject.R
-import ir.ha.meproject.ui.MainActivity
-import ir.ha.meproject.utility.ext.hideKeyboard
+import ir.ha.meproject.ui.activity.MainActivity
+import ir.ha.meproject.utility.extensions.hideKeyboard
+import ir.ha.meproject.utility.ui.SnackBarUtils
 import java.lang.ref.WeakReference
 
 abstract class BaseFragment<VB : ViewBinding>(
@@ -36,7 +36,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated: ")
-        view.hideKeyboard()
+        hideKeyboard(view)
         initializing()
         uiConfig()
         listeners()
@@ -44,7 +44,6 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
 
     open fun initializing(){
-        view?.hideKeyboard()
         Log.i(TAG, "initializing: ")
     }
 

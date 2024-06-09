@@ -2,9 +2,10 @@ package ir.ha.meproject.utility.security
 
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import ir.ha.meproject.utility.ext.isMarshmallowPlus
+import ir.ha.meproject.utility.extensions.isMarshmallowPlus
 
 const val PERMISSION_REQUEST_CODE = 10010
 
@@ -31,6 +32,16 @@ fun Activity.requestPermission(permission: String, requestCode: Int = PERMISSION
     }
 }
 
+
+
+fun checkPermission(activity: Activity , permission: String, requestCode: Int) {
+    if (ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_DENIED) {
+        // Requesting the permission
+        ActivityCompat.requestPermissions(activity, arrayOf(permission), requestCode)
+    } else {
+        Toast.makeText(activity, "Permission already granted", Toast.LENGTH_SHORT).show()
+    }
+}
 
 
 /** result

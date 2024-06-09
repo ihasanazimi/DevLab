@@ -9,8 +9,8 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
-import ir.ha.meproject.utility.ext.isMarshmallowPlus
-import ir.ha.meproject.utility.ext.isNougatPlus
+import ir.ha.meproject.utility.extensions.isMarshmallowPlus
+import ir.ha.meproject.utility.extensions.isNougatPlus
 import java.security.Key
 import java.security.KeyStore
 import java.security.SecureRandom
