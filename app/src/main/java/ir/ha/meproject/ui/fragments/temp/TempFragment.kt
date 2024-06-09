@@ -1,4 +1,4 @@
-package ir.ha.meproject.ui.fragments
+package ir.ha.meproject.ui.fragments.temp
 
 import ir.ha.meproject.databinding.FragmentTempBinding
 import ir.ha.meproject.utility.base.BaseFragment
