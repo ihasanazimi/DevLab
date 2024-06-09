@@ -5,7 +5,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import ir.ha.meproject.R
 import ir.ha.meproject.databinding.ActivityMainBinding
-import ir.ha.meproject.ui.fragments.temp.TempFragment
+import ir.ha.meproject.ui.fragments.temp1.Temp1Fragment
 import ir.ha.meproject.utility.base.BaseActivity
 import ir.ha.meproject.utility.extensions.addFragmentByAnimation
 
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
 
-        addFragmentByAnimation(TempFragment(), TempFragment::class.java.simpleName,true,true,R.id.main)
+        addFragmentByAnimation(Temp1Fragment(), Temp1Fragment::class.java.simpleName,true,true,R.id.main)
 
     }
 

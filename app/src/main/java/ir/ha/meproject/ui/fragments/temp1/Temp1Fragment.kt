@@ -1,9 +1,9 @@
-package ir.ha.meproject.ui.fragments.temp
+package ir.ha.meproject.ui.fragments.temp1
 
-import ir.ha.meproject.databinding.FragmentTempBinding
+import ir.ha.meproject.databinding.FragmentTemp1Binding
 import ir.ha.meproject.utility.base.BaseFragment
 
-class TempFragment : BaseFragment<FragmentTempBinding>(FragmentTempBinding::inflate) {
+class Temp1Fragment : BaseFragment<FragmentTemp1Binding>(FragmentTemp1Binding::inflate) {
 
     override fun initializing() {
         super.initializing()
