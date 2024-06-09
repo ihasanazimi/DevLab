@@ -153,6 +153,7 @@ dependencies {
     // Kotlin Reflect
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.20")
 
+    // Multidex
 //    implementation("com.android.support:multidex:1.0.3")
 
 //    // PDF View
@@ -162,22 +163,16 @@ dependencies {
 //    implementation("com.github.aliab:Persian-Date-Picker-Dialog:1.8.0")
 
     // screen shot
-    implementation("com.github.nisrulz:screenshott:2.0.0")
-
-    // PDF generator
-//    implementation("org.apache.pdfbox:pdfbox:2.0.24")
+//    implementation("com.github.nisrulz:screenshott:2.0.0")
 
     // Biometric (Fingerprint)
     implementation("androidx.biometric:biometric:1.1.0")
 
-    // android SVG
-//    implementation("com.caverock:androidsvg:1.4")
-
     // GoogleServices (location)
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
-
-    implementation("it.sephiroth.android.library:number-sliding-picker:1.1.1")
+    // number picker btn style
+//    implementation("it.sephiroth.android.library:number-sliding-picker:1.1.1")
 
     // GoogleServices (fireBase)
 //    implementation("com.google.firebase:firebase-messaging:23.4.1")
