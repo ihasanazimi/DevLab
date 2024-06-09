@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package ir.ha.meproject.utility.ui;
+package ir.ha.meproject.utility.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

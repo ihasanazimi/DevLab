@@ -1,4 +1,4 @@
-package ir.ha.meproject.utility.ui
+package ir.ha.meproject.utility.util
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
