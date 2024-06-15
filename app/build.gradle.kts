@@ -178,18 +178,21 @@ dependencies {
 //    implementation("com.google.firebase:firebase-messaging:23.4.1")
 
     // Retrofit - it Converts Factories
-//    implementation 'com.squareup.retrofit2:retrofit:2.9.0' // okHttp
-//    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // GSON Converter
-//    implementation ("com.squareup.retrofit2:converter-jackson:2.9.0") // Jackson Converter
-//    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0") // RX adapter
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0") // okHttp
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // GSON Converter
+    implementation ("com.squareup.retrofit2:converter-jackson:2.9.0") // Jackson Converter
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0") // RX adapter
+
+    // RX kotlin
+//    implementation ("implementation(io.reactivex.rxjava2:rxkotlin:3.0.1)")
 
     /*// Dynamic Animation
     implementation("androidx.dynamicanimation:dynamicanimation:1.0.0")*/
 
     // RxJava  // RxAndroid
-//    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
-//    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
-//    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
+    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
 
     // Koin
 //    val koinVersion= "3.5.0"
@@ -208,6 +211,16 @@ dependencies {
     // OkHttp Log
 //    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
+
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+
+    //stetho
+    val stetho_version = "1.5.1"
+    implementation("com.facebook.stetho:stetho:$stetho_version")
+    implementation("com.facebook.stetho:stetho-okhttp3:$stetho_version")
+    implementation("com.facebook.stetho:stetho-js-rhino:$stetho_version")
 
 
 }

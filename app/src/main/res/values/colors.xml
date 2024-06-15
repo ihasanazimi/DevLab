@@ -5,4 +5,5 @@
     <color name="transparent">#00ffffff</color>
     <color name="backgroundColor">#fff</color>
     <color name="snackBar_BackgroundColor">#202020</color>
+    <color name="blue">#4891e0</color>
 </resources>

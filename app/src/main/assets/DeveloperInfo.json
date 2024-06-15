@@ -3,20 +3,24 @@
   "firstName": "Hasan",
   "lastName": "Azimi",
   "birthDate": "1997/Sep/24",
-  "profileImage": "https://drive.google.com/file/d/1sKRhz3FEqTkfxHLKzGE4pXWLJNJlsR5Z/view",
+  "profileImage": "https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg",
   "jobTitle": "Android Developer",
   "skills": [
     "android development",
     "kotlin",
-    "java SE",
+    "java-SE",
     "retrofit",
     "rxJava",
     "kotlin coroutines",
     "flow",
     "live data",
-    "costume views",
+    "custom-views",
     "services",
-    "fir-base"
+    "event-bus",
+    "fir-base",
+    "rx-Kotlin",
+    "ci/cd",
+    "jetpack-compose"
   ],
   "contactInfo": {
     "call": "+989397106611",
