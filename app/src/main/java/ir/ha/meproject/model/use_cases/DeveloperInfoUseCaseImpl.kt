@@ -1,5 +1,7 @@
 package ir.ha.meproject.model.use_cases
 
+import androidx.lifecycle.LiveData
+import io.reactivex.rxjava3.core.Single
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.model.repositories.DeveloperInfoRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,5 +14,9 @@ class DeveloperInfoUseCaseImpl @Inject constructor(
 
     override suspend fun getDeveloperInfo(): Flow<DeveloperInfo> {
         return developerInfoRepository.getDeveloperInfo()
+    }
+
+    override fun getDeveloperInfoByRx(): Single<DeveloperInfo> {
+        return developerInfoRepository.getDeveloperInfoByRx()
     }
 }

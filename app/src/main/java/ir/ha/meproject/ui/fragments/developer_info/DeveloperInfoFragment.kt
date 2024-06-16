@@ -1,5 +1,6 @@
 package ir.ha.meproject.ui.fragments.developer_info
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -9,6 +10,7 @@ import ir.ha.meproject.databinding.FragmentDeveloperInfoBinding
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.utility.base.BaseFragment
 import ir.ha.meproject.utility.extensions.withNotNull
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
@@ -20,7 +22,10 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
 
     override fun initializing() {
         super.initializing()
-        viewModel.getDeveloperInfoByKotlinCoroutines()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val kt = async { viewModel.getDeveloperInfoByKotlinCoroutines() }
+            val rx = async { viewModel.getDeveloperInfoByRxKotlin() }
+        }
     }
 
     override fun observers() {
@@ -28,15 +33,21 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.developerInfo.collect{
+                Log.i(TAG, "DATA received is BY Kotlin Coroutines ${System.currentTimeMillis()}")
                 updateUi(it)
             }
+        }
+
+        viewModel.developerInfoLiveData.observe(viewLifecycleOwner){
+            Log.i(TAG, "DATA received is BY RX ${System.currentTimeMillis()}")
+            updateUi(it)
         }
 
 
     }
 
-    private fun updateUi(it: DeveloperInfo) {
-        it.withNotNull {
+    private fun updateUi(developerInfo: DeveloperInfo) {
+        developerInfo.withNotNull {
             loadProfileImage()
             binding.profleFullNameTV.text = "Mr." + it.firstName.plus(" ").plus(it.lastName)
             binding.jobTitleTV.text = it.jobTitle + " at " + it.resume.organizes.first().organizeName
