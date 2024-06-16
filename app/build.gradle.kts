@@ -65,6 +65,7 @@ android {
 
 dependencies {
 
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -75,10 +76,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-//    // test libs
-//    testImplementation("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-//    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // test libs
+    //testImplementation("junit:junit:4.13.2")
+    //androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    //androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
 
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -90,9 +91,6 @@ dependencies {
 
     // Google MaterialDesign
     implementation("com.google.android.material:material:1.11.0")
-
-    // GSON
-    implementation("com.google.code.gson:gson:2.10.1")
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
@@ -132,7 +130,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
 
     // Circle Image View
-//    implementation("de.hdodenhof:circleimageview:3.1.0")
+    //implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // lottie animations
     implementation("com.airbnb.android:lottie:5.2.0")
@@ -154,16 +152,16 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.20")
 
     // Multidex
-//    implementation("com.android.support:multidex:1.0.3")
+    //implementation("com.android.support:multidex:1.0.3")
 
-//    // PDF View
-//    implementation("com.dmitryborodin:pdfview-android:1.1.0")
+    // PDF View
+    //implementation("com.dmitryborodin:pdfview-android:1.1.0")
 
     // persian datePicker
-//    implementation("com.github.aliab:Persian-Date-Picker-Dialog:1.8.0")
+    //implementation("com.github.aliab:Persian-Date-Picker-Dialog:1.8.0")
 
     // screen shot
-//    implementation("com.github.nisrulz:screenshott:2.0.0")
+    //implementation("com.github.nisrulz:screenshott:2.0.0")
 
     // Biometric (Fingerprint)
     implementation("androidx.biometric:biometric:1.1.0")
@@ -172,41 +170,58 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
     // number picker btn style
-//    implementation("it.sephiroth.android.library:number-sliding-picker:1.1.1")
+    //implementation("it.sephiroth.android.library:number-sliding-picker:1.1.1")
 
     // GoogleServices (fireBase)
-//    implementation("com.google.firebase:firebase-messaging:23.4.1")
+    //implementation("com.google.firebase:firebase-messaging:23.4.1")
 
-    // Retrofit - it Converts Factories
-//    implementation 'com.squareup.retrofit2:retrofit:2.9.0' // okHttp
-//    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // GSON Converter
-//    implementation ("com.squareup.retrofit2:converter-jackson:2.9.0") // Jackson Converter
-//    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0") // RX adapter
+    // Retrofit by converters
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0") // okHttp
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // GSON Converter
+    implementation ("com.squareup.retrofit2:converter-jackson:2.9.0") // Jackson Converter
+    implementation ("com.squareup.retrofit2:adapter-rxjava3:2.9.0") // RX3 adapter
+    //    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0") // RX2 adapter
 
-    /*// Dynamic Animation
-    implementation("androidx.dynamicanimation:dynamicanimation:1.0.0")*/
+    // GSON
+    implementation("com.google.code.gson:gson:2.10.1")
 
-    // RxJava  // RxAndroid
-//    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
-//    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
-//    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+    // RxJava/RxAndroid Version 3
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.5")
+    implementation ("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+
+    // RxJava/RxAndroid Version 2
+    /* implementation("io.reactivex.rxjava2:rxjava:2.2.9")
+    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
+    */
+
 
     // Koin
-//    val koinVersion= "3.5.0"
-//    implementation("io.insert-koin:koin-android:$koinVersion")
+    //val koinVersion= "3.5.0"
+    //implementation("io.insert-koin:koin-android:$koinVersion")
 
     // Fresco
-//    implementation("com.facebook.fresco:fresco:2.6.0")
+    //implementation("com.facebook.fresco:fresco:2.6.0")
 
     // Picasso
-//    implementation("com.squareup.picasso:picasso:2.71828")
+    // implementation("com.squareup.picasso:picasso:2.71828")
 
     // Coil ImageLoader
-//    implementation("io.coil-kt:coil:2.0.0-rc03")
+    //implementation("io.coil-kt:coil:2.0.0-rc03")
 
 
     // OkHttp Log
-//    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    //implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
+
+    //stetho
+    val stetho_version = "1.5.1"
+    implementation("com.facebook.stetho:stetho:$stetho_version")
+    implementation("com.facebook.stetho:stetho-okhttp3:$stetho_version")
+    implementation("com.facebook.stetho:stetho-js-rhino:$stetho_version")
+
 
 
 
