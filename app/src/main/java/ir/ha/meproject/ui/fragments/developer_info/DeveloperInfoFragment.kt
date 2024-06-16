@@ -10,8 +10,12 @@ import ir.ha.meproject.databinding.FragmentDeveloperInfoBinding
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.utility.base.BaseFragment
 import ir.ha.meproject.utility.extensions.withNotNull
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -19,12 +23,23 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
 
     private val viewModel : DeveloperInfoFragmentVM by viewModels()
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ m , t ->
+        showMessage(t.message.toString())
+    }
 
     override fun initializing() {
         super.initializing()
         viewLifecycleOwner.lifecycleScope.launch {
-            val kt = async { viewModel.getDeveloperInfoByKotlinCoroutines() }
-            val rx = async { viewModel.getDeveloperInfoByRxKotlin() }
+            runBlocking {
+                val temp1 = async {
+                    viewModel.getDeveloperInfoByKotlinCoroutines()
+                }
+                val temp2 = async {
+                    viewModel.getDeveloperInfoByRxKotlin()
+                }
+                val t1 = temp1.await()
+                val t2 = temp2.await()
+            }
         }
     }
 

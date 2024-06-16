@@ -1,5 +1,6 @@
 package ir.ha.meproject.ui.fragments.developer_info
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +30,7 @@ class DeveloperInfoFragmentVM @Inject constructor(
     val developerInfoLiveData = MutableLiveData<DeveloperInfo>()
 
     fun getDeveloperInfoByKotlinCoroutines() {
+        Log.i(TAG, "getDeveloperInfoByKotlinCoroutines: ")
         viewModelScope.launch {
             developerInfoUseCase.getDeveloperInfo().collect {
                 _developerInfo.emit(it)
@@ -37,6 +39,7 @@ class DeveloperInfoFragmentVM @Inject constructor(
     }
 
     fun getDeveloperInfoByRxKotlin() {
+        Log.i(TAG, "getDeveloperInfoByRxKotlin: ")
         val observable = developerInfoUseCase.getDeveloperInfoByRx()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
