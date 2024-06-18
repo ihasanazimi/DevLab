@@ -41,7 +41,6 @@ class DeveloperInfoFragmentVM @Inject constructor(
 
     fun getDeveloperInfoByKotlinCoroutines() {
         Log.i(TAG, "getDeveloperInfoByKotlinCoroutines: ")
-        showLoading.value = true
         viewModelScope.launch(coroutineExceptionHandler) {
             developerInfoUseCase.getDeveloperInfo().collect {
                 _developerInfoFlow.emit(it)
@@ -51,16 +50,18 @@ class DeveloperInfoFragmentVM @Inject constructor(
 
     fun getDeveloperInfoByRxKotlin() {
         Log.i(TAG, "getDeveloperInfoByRxKotlin: ")
-        showLoading.value = true
         developerInfoUseCase.getDeveloperInfoByRx()
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { showLoading.value = true }
+            .doOnComplete { showLoading.value = false }
+            .doOnError {
+                showLoading.value = false
+                errorMessage.value = it.message
+            }
             .subscribeBy(
-                onComplete = { showLoading.value = false },
                 onNext = { developerInfoLiveData.value = it },
-                onError = {
-                    showLoading.value = false
-                    errorMessage.value = it.message
-                }
+                onError = { errorMessage.value = it.message },
+                onComplete = { Log.i(TAG, "getDeveloperInfoByRxKotlin: onComplete ") }
             ).addTo(compositeDisposable)
     }
 
