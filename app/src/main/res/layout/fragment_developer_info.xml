@@ -145,5 +145,10 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <include
+        android:id="@+id/loadingBar"
+        android:visibility="gone"
+        layout="@layout/layout_loading"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

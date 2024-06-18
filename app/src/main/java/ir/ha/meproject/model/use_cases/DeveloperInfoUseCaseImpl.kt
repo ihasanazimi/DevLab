@@ -1,6 +1,7 @@
 package ir.ha.meproject.model.use_cases
 
 import androidx.lifecycle.LiveData
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.model.repositories.DeveloperInfoRepository
@@ -16,7 +17,7 @@ class DeveloperInfoUseCaseImpl @Inject constructor(
         return developerInfoRepository.getDeveloperInfo()
     }
 
-    override fun getDeveloperInfoByRx(): Single<DeveloperInfo> {
+    override fun getDeveloperInfoByRx(): Observable<DeveloperInfo> {
         return developerInfoRepository.getDeveloperInfoByRx()
     }
 }

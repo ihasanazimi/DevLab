@@ -6,11 +6,12 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import io.reactivex.rxjava3.schedulers.Schedulers
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.model.use_cases.DeveloperInfoUseCase
 import ir.ha.meproject.utility.base.BaseViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -22,41 +23,51 @@ class DeveloperInfoFragmentVM @Inject constructor(
     private val developerInfoUseCase: DeveloperInfoUseCase
 ) : BaseViewModel() {
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ m , t ->
+        errorMessage.value = (t.message.toString())
+    }
+
+
     private val compositeDisposable = CompositeDisposable()
 
-    private val _developerInfo = MutableSharedFlow<DeveloperInfo>()
-    val developerInfo = _developerInfo.asSharedFlow()
+    private val _developerInfoFlow = MutableSharedFlow<DeveloperInfo>()
+    val developerInfoFlow = _developerInfoFlow.asSharedFlow()
 
     val developerInfoLiveData = MutableLiveData<DeveloperInfo>()
 
+    val errorMessage = MutableLiveData<String>()
+
+    val showLoading = MutableLiveData<Boolean>()
+
     fun getDeveloperInfoByKotlinCoroutines() {
         Log.i(TAG, "getDeveloperInfoByKotlinCoroutines: ")
-        viewModelScope.launch {
+        showLoading.value = true
+        viewModelScope.launch(coroutineExceptionHandler) {
             developerInfoUseCase.getDeveloperInfo().collect {
-                _developerInfo.emit(it)
+                _developerInfoFlow.emit(it)
             }
         }
     }
 
     fun getDeveloperInfoByRxKotlin() {
         Log.i(TAG, "getDeveloperInfoByRxKotlin: ")
-        val observable = developerInfoUseCase.getDeveloperInfoByRx()
-            .subscribeOn(Schedulers.newThread())
+        showLoading.value = true
+        developerInfoUseCase.getDeveloperInfoByRx()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    developerInfoLiveData.value = it
-                },
+                onComplete = { showLoading.value = false },
+                onNext = { developerInfoLiveData.value = it },
                 onError = {
-                    println("HSN_Error: ${it.message}")
+                    showLoading.value = false
+                    errorMessage.value = it.message
                 }
-            )
-        compositeDisposable.add(observable)
+            ).addTo(compositeDisposable)
     }
 
 
     override fun onCleared() {
         super.onCleared()
+        Log.i(TAG, "onCleared: ")
         compositeDisposable.clear()
     }
 }

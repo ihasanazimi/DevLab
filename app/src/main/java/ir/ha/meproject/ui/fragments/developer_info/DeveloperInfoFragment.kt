@@ -1,6 +1,7 @@
 package ir.ha.meproject.ui.fragments.developer_info
 
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -10,9 +11,6 @@ import ir.ha.meproject.databinding.FragmentDeveloperInfoBinding
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
 import ir.ha.meproject.utility.base.BaseFragment
 import ir.ha.meproject.utility.extensions.withNotNull
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -22,10 +20,6 @@ import kotlinx.coroutines.runBlocking
 class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(FragmentDeveloperInfoBinding::inflate) {
 
     private val viewModel : DeveloperInfoFragmentVM by viewModels()
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ m , t ->
-        showMessage(t.message.toString())
-    }
 
     override fun initializing() {
         super.initializing()
@@ -47,7 +41,7 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
         super.observers()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.developerInfo.collect{
+            viewModel.developerInfoFlow.collect{
                 Log.i(TAG, "DATA received is BY Kotlin Coroutines ${System.currentTimeMillis()}")
                 updateUi(it)
             }
@@ -56,6 +50,16 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
         viewModel.developerInfoLiveData.observe(viewLifecycleOwner){
             Log.i(TAG, "DATA received is BY RX ${System.currentTimeMillis()}")
             updateUi(it)
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner){
+            Log.i(TAG, "observers - errorMessage : $it")
+            showErrorMessage(it)
+        }
+
+        viewModel.showLoading.observe(viewLifecycleOwner){
+            Log.i(TAG, "observers - showLoading : $it")
+            binding.loadingBar.root.isVisible = it
         }
 
 
