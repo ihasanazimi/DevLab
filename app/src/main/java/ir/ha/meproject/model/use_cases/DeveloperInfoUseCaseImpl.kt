@@ -1,10 +1,8 @@
 package ir.ha.meproject.model.use_cases
 
-import androidx.lifecycle.LiveData
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
-import ir.ha.meproject.model.repositories.DeveloperInfoRepository
+import ir.ha.meproject.model.repositories.developer_info.DeveloperInfoRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

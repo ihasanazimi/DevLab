@@ -1,4 +1,4 @@
-package ir.ha.meproject.model.repositories
+package ir.ha.meproject.model.repositories.developer_info
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers

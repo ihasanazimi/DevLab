@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 import javax.net.ssl.SSLSession
 
@@ -23,6 +24,7 @@ import javax.net.ssl.SSLSession
 object NetworkModule {
 
 
+    @Named("mock-retrofit")
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -32,6 +34,20 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl("https://mocki.io/v1/")
             .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+    }
+
+
+    @Named("withoutBaseUrl-retrofit")
+    @Provides
+    @Singleton
+    fun provideRetrofitWithoutBaseUrl(
+        okHttpClient: OkHttpClient,
+        gson: Gson
+    ): Retrofit.Builder{
+        return Retrofit.Builder()
+            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
     }
