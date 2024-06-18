@@ -19,8 +19,6 @@
     </declare-styleable>
 
 
-
-
     <declare-styleable name="CircleImageView">
         <attr name="src" format="reference"/>
         <attr name="scaleType">
