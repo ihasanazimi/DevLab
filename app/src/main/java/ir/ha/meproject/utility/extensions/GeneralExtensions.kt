@@ -649,3 +649,13 @@ inline fun <reified T:Any> String.castFromJson(): T? {
     return Gson().fromJson(this, T::class.java)
 }
 
+
+
+fun isValidPostalCode(code: String): Boolean {
+    if (code.length != 10) {
+        return false
+    }
+    val regex = Regex("^[1346789]\\d{4}[0-46789]\\d{3}\$").toPattern()
+    val matcher = regex.matcher(code)
+    return matcher.matches()
+}
