@@ -26,7 +26,7 @@ class BiometricHelper(
     private val TAG = BiometricHelper::class.java.simpleName
 
     companion object {
-        const val EWANO_BIOMETRIC_KEY = "EWANO_BIOMETRIC_KEY"
+        const val EWANO_BIOMETRIC_KEY = "HASAN_AZIMI_BIOMETRIC_KEY"
         const val androidKeyStore = "AndroidKeyStore"
     }
 
