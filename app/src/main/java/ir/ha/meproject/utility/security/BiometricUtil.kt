@@ -23,9 +23,9 @@ class BiometricUtil(
 
     companion object {
         private const val TAG = "BiometricUtil"
-        private const val KEY_NAME = "EWANO_BIOMETRIC_KEY"
+        private const val KEY_NAME = "HASAN_AZIMI_BIOMETRIC_KEY"
         private const val ANDROID_KEYSTORE = "AndroidKeyStore"
-        private val PASSWORD = charArrayOf('e', 'W', 'a', 'N', 'o')
+        private val PASSWORD = charArrayOf('h', 'a', 's', 'a', 'n')
         private const val KEY_ALGORITHM = KeyProperties.KEY_ALGORITHM_AES
         private const val BLOCK_MODE = KeyProperties.BLOCK_MODE_CBC
         private const val PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7
