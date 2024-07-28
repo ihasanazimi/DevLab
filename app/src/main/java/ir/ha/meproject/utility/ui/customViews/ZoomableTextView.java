@@ -10,7 +10,7 @@ import android.view.ScaleGestureDetector;
 import androidx.annotation.NonNull;
 
 public class ZoomableTextView extends androidx.appcompat.widget.AppCompatTextView {
-    private static final String TAG = "ZoomTextView";
+    private static final String TAG = "ZoomableTextView";
     private ScaleGestureDetector mScaleDetector;
 
     private float mScaleFactor = 1.f;

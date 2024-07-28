@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class DrawingView extends View {
+
   private static final float TOUCH_TOLERANCE = 4;
   private Bitmap bitmap;
   private Canvas canvas;
