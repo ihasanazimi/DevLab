@@ -29,19 +29,14 @@ public class ToggleImageView extends AppCompatImageView implements View.OnClickL
         void onUnchecked();
     }
 
-
     public ToggleImageView(Context context) {
         super(context);
     }
 
-
     public ToggleImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(
-                attrs,
-                ir.ha.meproject.R.styleable.ToggleImageView,
-                0, 0);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, ir.ha.meproject.R.styleable.ToggleImageView, 0, 0);
 
         try {
             mCheckedRes = typedArray.getResourceId(ir.ha.meproject.R.styleable.ToggleImageView_src_checked, 0);
@@ -51,8 +46,7 @@ public class ToggleImageView extends AppCompatImageView implements View.OnClickL
             typedArray.recycle();
         }
 
-        if (mUncheckedRes!=0)
-            setImage(mUncheckedRes);
+        if (mUncheckedRes!=0) setImage(mUncheckedRes);
 
         this.setOnClickListener(this);
     }
@@ -63,39 +57,28 @@ public class ToggleImageView extends AppCompatImageView implements View.OnClickL
 
         if (mState == STATE_CHECKED) {
             mState = STATE_UNCHECKED;
-
             setImage(mUncheckedRes);
-
-            if (mCallbacks != null)
-                mCallbacks.onUnchecked();
-
+            if (mCallbacks != null) mCallbacks.onUnchecked();
         } else {
             mState = STATE_CHECKED;
-
             setImage(mCheckedRes);
-
-            if (mCallbacks != null)
-                mCallbacks.onChecked();
+            if (mCallbacks != null) mCallbacks.onChecked();
         }
 
     }
 
 
-    /**
-     * Set image from resource
-     *
-     * @param resID image resource id
-     */
+    /** Set image from resource
+     * @param resID image resource id */
+
     private void setImage(int resID) {
 
         if (resID != 0) {
             this.setImageResource(resID);
-
         } else {
             Log.i(TAG, "setImage: No image resource provided");
         }
     }
-
 
     public void addStateListener(OnStateChangedListener l) {
         mCallbacks = l;
@@ -112,17 +95,13 @@ public class ToggleImageView extends AppCompatImageView implements View.OnClickL
     public void setChecked(boolean callback){
         mState = STATE_CHECKED;
         setImage(mCheckedRes);
-
-        if (callback)
-            mCallbacks.onChecked();
+        if (callback) mCallbacks.onChecked();
     }
 
     public void setUnchecked(boolean callback){
         mState = STATE_UNCHECKED;
         setImage(mUncheckedRes);
-
-        if (callback)
-            mCallbacks.onUnchecked();
+        if (callback) mCallbacks.onUnchecked();
     }
 
     public int getState(){
