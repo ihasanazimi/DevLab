@@ -23,7 +23,6 @@ lottie = "5.2.0"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
-materialVersion = "1.12.0"
 navigationVersion = "2.7.7"
 pagingVersion = "3.3.0"
 playServicesLocation = "21.3.0"
@@ -79,7 +78,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 #noinspection SimilarGradleDependency
-material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
