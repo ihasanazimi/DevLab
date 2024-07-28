@@ -19,6 +19,4 @@ class Temp1Fragment : BaseFragment<FragmentTemp1Binding>(FragmentTemp1Binding::i
         super.listeners()
     }
 
-
-
 }
