@@ -17,7 +17,7 @@ appcompat = "1.7.0"
 kotlinReflect = "1.9.20"
 kotlinxCoroutinesAndroid = "1.8.0"
 legacySupportV4 = "1.0.0"
-libraryNoOp = "4.0.0"
+chucker_libraryNoOp = "4.0.0"
 lifecycleExtensions = "2.2.0"
 lottie = "5.2.0"
 material = "1.12.0"
@@ -36,7 +36,21 @@ stetho = "1.5.1"
 viewmodel = "1.1.1"
 kspVersion = "1.9.22-1.0.17"
 
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+
+
+
 [libraries]
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
+chucker1 = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker_libraryNoOp" }
+chucker2 = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker_libraryNoOp" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,23 +75,22 @@ androidx-rules = { module = "androidx.test:rules", version.ref = "rules" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 converter-jackson = { module = "com.squareup.retrofit2:converter-jackson", version.ref = "retrofit" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
-chucker1 = { module = "com.github.chuckerteam.chucker:library", version.ref = "libraryNoOp" }
-chucker2 = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "libraryNoOp" }
-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+
+
+
 #noinspection SimilarGradleDependency
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+
 #noinspection SimilarGradleDependency
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -88,9 +101,4 @@ stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
 stetho-js-rhino = { module = "com.facebook.stetho:stetho-js-rhino", version.ref = "stetho" }
 stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
 viewmodel = { module = "android.arch.lifecycle:viewmodel", version.ref = "viewmodel" }
-
-[plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 
