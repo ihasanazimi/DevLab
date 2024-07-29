@@ -34,6 +34,7 @@ rxjava = "3.1.5"
 rxkotlin = "3.0.1"
 stetho = "1.5.1"
 viewmodel = "1.1.1"
+kspVersion = "1.9.22-1.0.17"
 
 [libraries]
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
@@ -91,4 +92,5 @@ viewmodel = { module = "android.arch.lifecycle:viewmodel", version.ref = "viewmo
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 
