@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
     id ("dagger.hilt.android.plugin")
     id ("kotlin-parcelize")
     id ("androidx.navigation.safeargs.kotlin")
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -57,9 +57,9 @@ android {
         viewBinding = true
     }
 
-    kapt {
-        correctErrorTypes = true
-    }
+//    kapt {
+//        correctErrorTypes = true
+//    }
 
 //    /** for pdf generator */
 //    packagingOptions {
@@ -103,7 +103,7 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     androidTestImplementation(libs.androidx.rules)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Glide ImageLoader
     implementation(libs.glide)
@@ -114,7 +114,7 @@ dependencies {
 
     // room dataBase
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     androidTestImplementation(libs.androidx.room.testing)
 
     // Nav Component
