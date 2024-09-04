@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import ir.ha.meproject.R
 
@@ -24,7 +23,7 @@ class SnackBarUtil {
             activity: Activity,
             message: String,
             @DrawableRes iconRes: Int,
-            duration: Int = Snackbar.LENGTH_SHORT
+            duration: Int = Snackbar.LENGTH_LONG
         ) {
             val rootView = activity.findViewById<View>(android.R.id.content) as ViewGroup
             val snackbar = Snackbar.make(rootView, "", duration)
