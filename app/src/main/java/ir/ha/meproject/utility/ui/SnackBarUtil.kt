@@ -30,7 +30,7 @@ class SnackBarUtil {
             val snackbar = Snackbar.make(rootView, "", duration)
             snackbar.setBackgroundTint(Color.TRANSPARENT)
 
-            val customView = LayoutInflater.from(activity).inflate(R.layout.snackbar_custom, null)
+            val customView = LayoutInflater.from(activity).inflate(R.layout.layout_snack_bar, null)
 
             val iconView = customView.findViewById<ImageView>(R.id.snackbar_icon)
             val textView = customView.findViewById<TextView>(R.id.snackbar_text)
