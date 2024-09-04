@@ -9,8 +9,7 @@ import androidx.viewbinding.ViewBinding
 import ir.ha.meproject.R
 import ir.ha.meproject.utility.locale.PERSIAN_LANGUAGE_CODE
 import ir.ha.meproject.utility.locale.localizedContext
-import ir.ha.meproject.utility.ui.SnackBarUtils
-import java.lang.ref.WeakReference
+import ir.ha.meproject.utility.ui.SnackBarUtil
 import java.util.Locale
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -61,15 +60,15 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     fun showErrorMessage(message: String) {
         Log.e(TAG, "showErrorMessage - $message")
-        SnackBarUtils.showSnackBar(
-            WeakReference(this), message, R.drawable.baseline_error_outline_24
+        SnackBarUtil.showSnackBar(
+            this, message, R.drawable.baseline_error_outline_24
         )
     }
 
     fun showMessage(message: String, icon: Int = R.drawable.baseline_done_24) {
         Log.e(TAG, "showMessage : $message")
-        SnackBarUtils.showSnackBar(
-            WeakReference(this), message, icon
+        SnackBarUtil.showSnackBar(
+            this, message, icon
         )
     }
 }

@@ -4,7 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="backgroundColor">#fff</color>
-    <color name="snackBar_BackgroundColor">#202020</color>
-    <color name="textColorNormality">#1D1D1D</color>
-    <color name="textColorReverse">#EBEBEB</color>
-</resources>
+    <color name="snackBar_BackgroundColor">#C3C3C3</color>
+    <color name="textColorNormality">#EBEBEB</color>
+    <color name="textColorReverse">#282828</color></resources>
