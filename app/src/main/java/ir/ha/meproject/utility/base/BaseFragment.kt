@@ -10,16 +10,13 @@ import androidx.viewbinding.ViewBinding
 import ir.ha.meproject.R
 import ir.ha.meproject.ui.activity.MainActivity
 import ir.ha.meproject.utility.extensions.hideKeyboard
-import ir.ha.meproject.utility.ui.SnackBarUtils
-import java.lang.ref.WeakReference
+import ir.ha.meproject.utility.ui.SnackBarUtil
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 ) : Fragment() {
 
-
     val TAG = this::class.java.simpleName
-
     val parentActivity by lazy { (requireActivity() as MainActivity) }
 
     private var _binding: VB? = null
@@ -59,15 +56,15 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     fun showErrorMessage(message: String) {
         Log.e(TAG, "showErrorMessage - $message")
-        SnackBarUtils.showSnackBar(
-            WeakReference(requireActivity()), message, R.drawable.baseline_error_outline_24
+        SnackBarUtil.showSnackBar(
+            requireActivity() , message, R.drawable.baseline_error_outline_24
         )
     }
 
     fun showMessage(message: String, icon: Int = R.drawable.baseline_done_24) {
         Log.e("TAG", "showMessage: ")
-        SnackBarUtils.showSnackBar(
-            WeakReference(requireActivity()), message, icon
+        SnackBarUtil.showSnackBar(
+          requireActivity(), message, icon
         )
     }
 
