@@ -30,9 +30,12 @@
             android:id="@+id/snackbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/textColorReverse"
+            android:justificationMode="inter_word"
             android:textSize="16sp"
-            tools:text="this is test message!" />
+            tools:text="this is test message!"
+            tools:targetApi="o" />
 
     </LinearLayout>
 
