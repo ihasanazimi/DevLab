@@ -7,11 +7,11 @@ import retrofit2.http.GET
 
 interface WebServices {
 
-    @GET("536247ec-6752-495b-b43d-d6e68e2e225d")
+    @GET("24f7eb6b-d4b8-4044-b6e8-028ffd97d8b7")
     suspend fun getDeveloperInformation() : DeveloperInfo
 
 
-    @GET("536247ec-6752-495b-b43d-d6e68e2e225d")
+    @GET("24f7eb6b-d4b8-4044-b6e8-028ffd97d8b7")
     fun getDeveloperInformationByRx() : Single<DeveloperInfo>
 
 }

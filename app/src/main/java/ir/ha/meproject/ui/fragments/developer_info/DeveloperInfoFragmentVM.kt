@@ -23,30 +23,37 @@ class DeveloperInfoFragmentVM @Inject constructor(
     private val developerInfoUseCase: DeveloperInfoUseCase
 ) : BaseViewModel() {
 
+
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ m , t ->
         errorMessage.value = (t.message.toString())
+        showLoading.value = false
     }
 
+    // for KotlinCoroutines
+    private val _developerInfoForKotlinCoroutines = MutableSharedFlow<DeveloperInfo>()
+    val developerInfoForKotlinCoroutines = _developerInfoForKotlinCoroutines.asSharedFlow()
 
-    private val compositeDisposable = CompositeDisposable()
+    // for RxAndroid|Kotlin
+    val developerInfoForRxAndroid = MutableLiveData<DeveloperInfo>()
 
-    private val _developerInfoFlow = MutableSharedFlow<DeveloperInfo>()
-    val developerInfoFlow = _developerInfoFlow.asSharedFlow()
-
-    val developerInfoLiveData = MutableLiveData<DeveloperInfo>()
-
+    /** this fields has shared between top data holder */
+    val showLoading = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    val showLoading = MutableLiveData<Boolean>()
 
     fun getDeveloperInfoByKotlinCoroutines() {
         Log.i(TAG, "getDeveloperInfoByKotlinCoroutines: ")
         viewModelScope.launch(coroutineExceptionHandler) {
             developerInfoUseCase.getDeveloperInfo().collect {
-                _developerInfoFlow.emit(it)
+                _developerInfoForKotlinCoroutines.emit(it)
             }
         }
     }
+
+
+
+
+    private val compositeDisposable = CompositeDisposable()
 
     fun getDeveloperInfoByRxKotlin() {
         Log.i(TAG, "getDeveloperInfoByRxKotlin: ")
@@ -59,11 +66,17 @@ class DeveloperInfoFragmentVM @Inject constructor(
                 errorMessage.value = it.message
             }
             .subscribeBy(
-                onNext = { developerInfoLiveData.value = it },
-                onError = { errorMessage.value = it.message },
+                onNext = { developerInfoForRxAndroid.value = it },
+                onError = {
+                    errorMessage.value = it.message
+                    showLoading.value = false
+                          },
                 onComplete = { Log.i(TAG, "getDeveloperInfoByRxKotlin: onComplete ") }
             ).addTo(compositeDisposable)
     }
+
+
+
 
 
     override fun onCleared() {

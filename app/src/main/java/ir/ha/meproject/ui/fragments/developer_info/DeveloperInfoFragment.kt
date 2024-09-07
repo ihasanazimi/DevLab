@@ -13,7 +13,6 @@ import ir.ha.meproject.utility.base.BaseFragment
 import ir.ha.meproject.utility.extensions.withNotNull
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -24,16 +23,10 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
     override fun initializing() {
         super.initializing()
         viewLifecycleOwner.lifecycleScope.launch {
-            runBlocking {
-                val temp1 = async {
-                    viewModel.getDeveloperInfoByKotlinCoroutines()
-                }
-                val temp2 = async {
-                    viewModel.getDeveloperInfoByRxKotlin()
-                }
-                val t1 = temp1.await()
-                val t2 = temp2.await()
-            }
+            val temp1 = async { viewModel.getDeveloperInfoByKotlinCoroutines() }
+            val temp2 = async { viewModel.getDeveloperInfoByRxKotlin() }
+            temp1.await()
+            temp2.await()
         }
     }
 
@@ -41,14 +34,14 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
         super.observers()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.developerInfoFlow.collect{
-                Log.i(TAG, "DATA received is BY Kotlin Coroutines ${System.currentTimeMillis()}")
+            viewModel.developerInfoForKotlinCoroutines.collect{
+                Log.i(TAG, "DATA received By KotlinCoroutines at this time -> ${System.currentTimeMillis()}")
                 updateUi(it)
             }
         }
 
-        viewModel.developerInfoLiveData.observe(viewLifecycleOwner){
-            Log.i(TAG, "DATA received is BY RX ${System.currentTimeMillis()}")
+        viewModel.developerInfoForRxAndroid.observe(viewLifecycleOwner){
+            Log.i(TAG, "DATA received By RxAndroid at this time -> ${System.currentTimeMillis()}")
             updateUi(it)
         }
 
@@ -70,6 +63,7 @@ class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(Fragme
             loadProfileImage()
             binding.profleFullNameTV.text = "Mr." + it.firstName.plus(" ").plus(it.lastName)
             binding.jobTitleTV.text = it.jobTitle + " at " + it.resume.organizes.first().organizeName
+            showMessage("done!")
         }
     }
 
