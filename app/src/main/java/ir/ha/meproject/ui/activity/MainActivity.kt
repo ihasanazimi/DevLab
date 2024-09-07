@@ -9,6 +9,7 @@ import ir.ha.meproject.databinding.ActivityMainBinding
 import ir.ha.meproject.ui.fragments.developer_info.DeveloperInfoFragment
 import ir.ha.meproject.utility.base.BaseActivity
 import ir.ha.meproject.utility.extensions.addFragmentByAnimation
+import ir.ha.meproject.utility.extensions.replaceFragmentByAnimation
 
 
 @AndroidEntryPoint
@@ -24,8 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             insets
         }
 
-
-        addFragmentByAnimation(DeveloperInfoFragment(), DeveloperInfoFragment::class.java.simpleName,true,true,R.id.main)
+        replaceFragmentByAnimation(DeveloperInfoFragment(), DeveloperInfoFragment::class.java.simpleName,false,true,R.id.main)
 
     }
 
