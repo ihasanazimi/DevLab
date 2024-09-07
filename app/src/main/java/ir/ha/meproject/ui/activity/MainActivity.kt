@@ -6,7 +6,7 @@ import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ir.ha.meproject.R
 import ir.ha.meproject.databinding.ActivityMainBinding
-import ir.ha.meproject.ui.fragments.developer_info.DeveloperInfoFragment
+import ir.ha.meproject.ui.fragments.pagination.PaginationFragment
 import ir.ha.meproject.utility.base.BaseActivity
 import ir.ha.meproject.utility.extensions.addFragmentByAnimation
 
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
 
-        addFragmentByAnimation(DeveloperInfoFragment(), DeveloperInfoFragment::class.java.simpleName,true,true,R.id.main)
+        addFragmentByAnimation(PaginationFragment(), PaginationFragment::class.java.simpleName,true,true,R.id.main)
 
     }
 
