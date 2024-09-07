@@ -19,15 +19,17 @@ import kotlinx.coroutines.launch
 class DeveloperInfoFragment  : BaseFragment<FragmentDeveloperInfoBinding>(FragmentDeveloperInfoBinding::inflate) {
 
     private val viewModel : DeveloperInfoFragmentVM by viewModels()
+    private val sendRequestByCoroutines = true
 
     override fun initializing() {
         super.initializing()
-        viewLifecycleOwner.lifecycleScope.launch {
-            val temp1 = async { viewModel.getDeveloperInfoByKotlinCoroutines() }
-            val temp2 = async { viewModel.getDeveloperInfoByRxKotlin() }
-            temp1.await()
-            temp2.await()
+
+        if (sendRequestByCoroutines){
+            viewModel.getDeveloperInfoByKotlinCoroutines()
+        }else {
+            viewModel.getDeveloperInfoByRxKotlin()
         }
+
     }
 
     override fun observers() {

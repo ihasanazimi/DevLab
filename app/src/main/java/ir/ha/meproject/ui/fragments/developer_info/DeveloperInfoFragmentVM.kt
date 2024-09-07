@@ -23,12 +23,6 @@ class DeveloperInfoFragmentVM @Inject constructor(
     private val developerInfoUseCase: DeveloperInfoUseCase
 ) : BaseViewModel() {
 
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ m , t ->
-        errorMessage.value = (t.message.toString())
-        showLoading.value = false
-    }
-
     // for KotlinCoroutines
     private val _developerInfoForKotlinCoroutines = MutableSharedFlow<DeveloperInfo>()
     val developerInfoForKotlinCoroutines = _developerInfoForKotlinCoroutines.asSharedFlow()
@@ -37,15 +31,26 @@ class DeveloperInfoFragmentVM @Inject constructor(
     val developerInfoForRxAndroid = MutableLiveData<DeveloperInfo>()
 
     /** this fields has shared between top data holder */
-    val showLoading = MutableLiveData<Boolean>()
+    private val _showLoading = MutableLiveData<Boolean>()
+    val showLoading = _showLoading
     val errorMessage = MutableLiveData<String>()
 
 
     fun getDeveloperInfoByKotlinCoroutines() {
         Log.i(TAG, "getDeveloperInfoByKotlinCoroutines: ")
-        viewModelScope.launch(coroutineExceptionHandler) {
-            developerInfoUseCase.getDeveloperInfo().collect {
-                _developerInfoForKotlinCoroutines.emit(it)
+        _showLoading.value = true
+        viewModelScope.launch {
+            runCatching {
+                developerInfoUseCase.getDeveloperInfo().collect {
+                    _developerInfoForKotlinCoroutines.emit(it)
+                }
+            }.onFailure {
+                Log.e(TAG, "getDeveloperInfoByKotlinCoroutines - happen error ")
+                errorMessage.value = (it.message.toString())
+                _showLoading.value = false
+            }.onSuccess {
+                Log.d(TAG, "getDeveloperInfoByKotlinCoroutines - Completed and done successfully ")
+                _showLoading.value = false
             }
         }
     }
@@ -59,19 +64,21 @@ class DeveloperInfoFragmentVM @Inject constructor(
         Log.i(TAG, "getDeveloperInfoByRxKotlin: ")
         developerInfoUseCase.getDeveloperInfoByRx()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { showLoading.value = true }
-            .doOnComplete { showLoading.value = false }
+            .doOnSubscribe { _showLoading.value = true }
+            .doOnComplete { _showLoading.value = false }
             .doOnError {
-                showLoading.value = false
+                Log.e(TAG, "getDeveloperInfoByRxKotlin - happen error ")
+                _showLoading.value = false
                 errorMessage.value = it.message
             }
             .subscribeBy(
                 onNext = { developerInfoForRxAndroid.value = it },
                 onError = {
+                    Log.e(TAG, "getDeveloperInfoByRxKotlin - happen error ")
                     errorMessage.value = it.message
-                    showLoading.value = false
+                    _showLoading.value = false
                           },
-                onComplete = { Log.i(TAG, "getDeveloperInfoByRxKotlin: onComplete ") }
+                onComplete = { Log.d(TAG, "getDeveloperInfoByRxKotlin - Completed and done successfully ") }
             ).addTo(compositeDisposable)
     }
 
@@ -81,7 +88,7 @@ class DeveloperInfoFragmentVM @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        Log.i(TAG, "onCleared: ")
         compositeDisposable.clear()
+        Log.i(TAG, "onCleared: ")
     }
 }
