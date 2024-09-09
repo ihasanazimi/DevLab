@@ -1,20 +1,18 @@
 package ir.ha.meproject.utility.util
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import ir.ha.meproject.utility.extensions.isTIRAMISUPlus
 import ir.ha.meproject.utility.extensions.showToast
-import ir.ha.meproject.utility.security.PermissionUtils
 
-class NotificationUtil(private val activity: Activity) {
+class NotificationUtil(private val context: Context) {
 
-    @SuppressLint("MissingPermission")
     fun showBasicNotification(
         channelId: String,
         title: String,
@@ -25,39 +23,28 @@ class NotificationUtil(private val activity: Activity) {
         notificationId: Int = 1
     ) {
         val pendingIntent: PendingIntent? = intent?.let {
-            PendingIntent.getActivity(activity, 0, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(context, 0, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         }
 
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(priority)
             .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
 
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
 
         notificationManager.notify(notificationId, builder.build())
     }
 
-    @SuppressLint("MissingPermission")
     fun showNotificationWithAction(
         channelId: String,
         title: String,
@@ -68,39 +55,27 @@ class NotificationUtil(private val activity: Activity) {
         notificationId: Int = 2
     ) {
         val actionPendingIntent: PendingIntent = PendingIntent.getActivity(
-            activity, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .addAction(0, actionText, actionPendingIntent)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
-
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
 
         notificationManager.notify(notificationId, builder.build())
     }
 
-    @SuppressLint("MissingPermission")
     fun showProgressNotification(
         channelId: String,
         title: String,
@@ -109,34 +84,21 @@ class NotificationUtil(private val activity: Activity) {
         progressCurrent: Int,
         notificationId: Int = 3
     ) {
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setProgress(progressMax, progressCurrent, false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
-
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
-
         notificationManager.notify(notificationId, builder.build())
     }
 
-    @SuppressLint("MissingPermission")
     fun updateProgressNotification(
         channelId: String,
         title: String,
@@ -145,34 +107,22 @@ class NotificationUtil(private val activity: Activity) {
         progressCurrent: Int,
         notificationId: Int
     ) {
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setProgress(progressMax, progressCurrent, false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
-
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
 
         notificationManager.notify(notificationId, builder.build())
     }
 
-    @SuppressLint("MissingPermission")
     fun showHighPriorityNotification(
         channelId: String,
         title: String,
@@ -180,35 +130,23 @@ class NotificationUtil(private val activity: Activity) {
         icon: Int,
         notificationId: Int = 4
     ) {
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
-
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
 
         notificationManager.notify(notificationId, builder.build())
     }
 
-    @SuppressLint("MissingPermission")
     fun showBigPictureNotification(
         channelId: String,
         title: String,
@@ -217,30 +155,19 @@ class NotificationUtil(private val activity: Activity) {
         icon: Int,
         notificationId: Int = 5
     ) {
-        val builder = NotificationCompat.Builder(activity, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(message)
             .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bigPicture))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
 
-        val notificationManager = NotificationManagerCompat.from(activity)
+        val notificationManager = NotificationManagerCompat.from(context)
 
-
-        if (isTIRAMISUPlus()){
-            if (PermissionUtils.arePermissionsGranted(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS)).not()) {
-                PermissionUtils.requestPermissions(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),2024,object : PermissionUtils.PermissionResultCallback{
-                    override fun onPermissionGranted() {
-                        showToast(activity,"Permission Granted")
-                    }
-
-                    override fun onPermissionDenied() {
-                        showToast(activity,"Permission Denied")
-                    }
-                })
-                return
-            }
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast(context,"Permissions not allowed")
+            return
         }
 
         notificationManager.notify(notificationId, builder.build())

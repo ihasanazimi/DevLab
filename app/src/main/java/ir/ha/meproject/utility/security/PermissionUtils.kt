@@ -1,11 +1,14 @@
 package ir.ha.meproject.utility.security
 
 import android.app.Activity
+import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 object PermissionUtils {
+
+
     fun requestPermissions(
         activity: Activity,
         permissions: Array<String>,
@@ -20,9 +23,9 @@ object PermissionUtils {
         }
     }
 
-    fun arePermissionsGranted(activity: Activity, permissions: Array<String>): Boolean {
+    fun arePermissionsGranted(context: Context, permissions: Array<String>): Boolean {
         for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
