@@ -3,7 +3,7 @@ package ir.ha.meproject.common.more
 
 import androidx.recyclerview.widget.DiffUtil
 
-class DiffUtilCallBack<T>(
+class DiffUtilHelper<T>(
     private val oldList: List<T>,
     private val newList: List<T>,
     private val areItemsTheSame: (T, T) -> Boolean, // Function to compare item IDs
@@ -15,6 +15,7 @@ class DiffUtilCallBack<T>(
     }
 
     override fun getNewListSize(): Int {
+
         return newList.size
     }
 

@@ -15,7 +15,7 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import ir.ha.meproject.R
 
-class SnackBarUtil {
+class SnackBarHelper {
 
     companion object {
         @SuppressLint("RestrictedApi")
@@ -37,14 +37,14 @@ class SnackBarUtil {
             iconView.setImageResource(iconRes)
             textView.text = message
 
-            val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-            snackbarLayout.setPadding(0, 0, 0, 0)
-            snackbarLayout.addView(customView, 0)
+            val snackBarLayout = snackbar.view as Snackbar.SnackbarLayout
+            snackBarLayout.setPadding(0, 0, 0, 0)
+            snackBarLayout.addView(customView, 0)
 
-            val parentParams = snackbarLayout.layoutParams as FrameLayout.LayoutParams
+            val parentParams = snackBarLayout.layoutParams as FrameLayout.LayoutParams
             parentParams.gravity = Gravity.TOP
             parentParams.setMargins(16, dpToPx(activity, 32), 16, 0) // تنظیم مارجین از بالا
-            snackbarLayout.layoutParams = parentParams
+            snackBarLayout.layoutParams = parentParams
 
             snackbar.show()
         }

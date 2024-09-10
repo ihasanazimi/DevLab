@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import ir.ha.meproject.common.extensions.showToast
 
-class NotificationUtil(private val context: Context) {
+class NotificationHelper(private val context: Context) {
 
     fun showBasicNotification(
         channelId: String,

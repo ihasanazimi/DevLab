@@ -10,7 +10,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
-import ir.ha.meproject.common.file.FontUtil
+import ir.ha.meproject.common.file.FontHelper
 
 class CircleProgress @JvmOverloads constructor(
     context: Context,
@@ -94,7 +94,7 @@ class CircleProgress @JvmOverloads constructor(
         this.progressTintColor = progressTintColor?.let { ContextCompat.getColor(context, it) } ?: Color.GRAY
         this.progressTextColor = progressTextColor?.let { ContextCompat.getColor(context, it) } ?: ContextCompat.getColor(context, android.R.color.holo_blue_light)
         this.progressTextSize = progressTextSize ?: 30f
-        this.progressTypeFace = progressFont?.let { FontUtil.getTypeface(context, it) }
+        this.progressTypeFace = progressFont?.let { FontHelper.getTypeface(context, it) }
         invalidate()
     }
 

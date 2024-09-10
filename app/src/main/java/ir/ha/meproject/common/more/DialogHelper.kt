@@ -20,14 +20,13 @@ import com.google.android.material.card.MaterialCardView
 import ir.ha.meproject.R
 import java.lang.ref.WeakReference
 
-object DialogUtil {
+object DialogHelper {
 
 
-    private val TAG = DialogUtil::class.java.simpleName
+    private val TAG = DialogHelper::class.java.simpleName
     private var dialog: Dialog? = null
     var status = false
 
-    @SuppressLint("MissingInflatedId")
     fun showInfoDialog(
         context: WeakReference<Context>,
         title: String,

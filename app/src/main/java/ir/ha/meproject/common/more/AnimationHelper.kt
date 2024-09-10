@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.View
@@ -19,10 +18,10 @@ import android.view.animation.LinearInterpolator
  * Created by ihasan.azimi@gmail.com on 5/7/15.
  */
 
-private const val TAG_ANIMATION = "AnimationUtils"
+private const val TAG_ANIMATION = "AnimationHelper"
 
 
-object AnimationUtils {
+object AnimationHelper {
 
     fun View.enableHardwareLayer() {
         // Enable hardware layer
@@ -32,10 +31,6 @@ object AnimationUtils {
     fun View.disableHardwareLayer() {
         // Restore to default layer type (none or software)
         this.setLayerType(View.LAYER_TYPE_NONE, null)
-    }
-
-    fun Float.dpToPx(context: Context): Float {
-        return this * context.resources.displayMetrics.density
     }
 
 

@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 import ir.ha.meproject.R
 import ir.ha.meproject.presentation.MainActivity
 import ir.ha.meproject.common.extensions.hideKeyboard
-import ir.ha.meproject.common.more.SnackBarUtil
+import ir.ha.meproject.common.more.SnackBarHelper
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -56,14 +56,14 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     fun showErrorMessage(message: String) {
         Log.e(TAG, "showErrorMessage - $message")
-        SnackBarUtil.showSnackBar(
+        SnackBarHelper.showSnackBar(
             requireActivity() , message, R.drawable.baseline_error_outline_24
         )
     }
 
     fun showMessage(message: String, icon: Int = R.drawable.baseline_done_24) {
         Log.e("TAG", "showMessage: ")
-        SnackBarUtil.showSnackBar(
+        SnackBarHelper.showSnackBar(
           requireActivity(), message, icon
         )
     }

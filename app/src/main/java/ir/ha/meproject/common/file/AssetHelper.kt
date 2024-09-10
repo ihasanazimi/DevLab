@@ -5,7 +5,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-object AssetUtil {
+object AssetHelper {
 
     // Copy asset file to internal storage and return its file path
     fun getFilePathFromAssets(context: Context, assetFileName: String): String? {

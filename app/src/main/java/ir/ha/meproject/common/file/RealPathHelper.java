@@ -12,21 +12,21 @@ import android.provider.MediaStore;
 
 import androidx.loader.content.CursorLoader;
 
-public class RealPathUtil {
+public class RealPathHelper {
 
     public static String getRealPath(Context context, Uri fileUri) {
         String realPath;
         // SDK < API11
         if (Build.VERSION.SDK_INT < 11) {
-            realPath = RealPathUtil.getRealPathFromURI_BelowAPI11(context, fileUri);
+            realPath = RealPathHelper.getRealPathFromURI_BelowAPI11(context, fileUri);
         }
         // SDK >= 11 && SDK < 19
         else if (Build.VERSION.SDK_INT < 19) {
-            realPath = RealPathUtil.getRealPathFromURI_API11to18(context, fileUri);
+            realPath = RealPathHelper.getRealPathFromURI_API11to18(context, fileUri);
         }
         // SDK > 19 (Android 4.4) and up
         else {
-            realPath = RealPathUtil.getRealPathFromURI_API19(context, fileUri);
+            realPath = RealPathHelper.getRealPathFromURI_API19(context, fileUri);
         }
         return realPath;
     }

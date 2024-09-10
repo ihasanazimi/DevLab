@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 import ir.ha.meproject.R
 import ir.ha.meproject.common.more.PERSIAN_LANGUAGE_CODE
 import ir.ha.meproject.common.more.localizedContext
-import ir.ha.meproject.common.more.SnackBarUtil
+import ir.ha.meproject.common.more.SnackBarHelper
 import java.util.Locale
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -60,14 +60,14 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     fun showErrorMessage(message: String) {
         Log.e(TAG, "showErrorMessage - $message")
-        SnackBarUtil.showSnackBar(
+        SnackBarHelper.showSnackBar(
             this, message, R.drawable.baseline_error_outline_24
         )
     }
 
     fun showMessage(message: String, icon: Int = R.drawable.baseline_done_24) {
         Log.e(TAG, "showMessage : $message")
-        SnackBarUtil.showSnackBar(
+        SnackBarHelper.showSnackBar(
             this, message, icon
         )
     }
