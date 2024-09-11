@@ -3,11 +3,12 @@ package ir.ha.meproject.presentation
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import dagger.hilt.android.AndroidEntryPoint
 import ir.ha.meproject.R
-import ir.ha.meproject.databinding.ActivityMainBinding
-import ir.ha.meproject.presentation.features.fragments.temp1.Temp1Fragment
 import ir.ha.meproject.common.base.BaseActivity
-import ir.ha.meproject.common.extensions.addFragmentByAnimation
+import ir.ha.meproject.common.extensions.replaceFragmentByAnimation
+import ir.ha.meproject.databinding.ActivityMainBinding
+import ir.ha.meproject.presentation.features.fragments.developer_info.DeveloperInfoFragment
 
 
 @AndroidEntryPoint

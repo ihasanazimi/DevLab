@@ -1,4 +1,4 @@
-package ir.ha.meproject.ui.fragments.developer_info
+package ir.ha.meproject.presentation.features.fragments.developer_info
 
 import android.util.Log
 import androidx.core.view.isVisible
@@ -7,11 +7,10 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import ir.ha.meproject.R
+import ir.ha.meproject.common.base.BaseFragment
+import ir.ha.meproject.common.extensions.withNotNull
 import ir.ha.meproject.databinding.FragmentDeveloperInfoBinding
 import ir.ha.meproject.model.data.developer_info.DeveloperInfo
-import ir.ha.meproject.utility.base.BaseFragment
-import ir.ha.meproject.utility.extensions.withNotNull
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
