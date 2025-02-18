@@ -24,8 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             insets
         }
 
-
-        addFragmentByAnimation(UsersFragment(), UsersFragment::class.java.simpleName,true,true,R.id.main)
+        addFragmentByAnimation(UsersFragment(), UsersFragment::class.java.simpleName,false,true,R.id.main)
 
     }
 
