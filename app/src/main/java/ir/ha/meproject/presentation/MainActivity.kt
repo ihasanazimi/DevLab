@@ -3,12 +3,15 @@ package ir.ha.meproject.presentation
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import dagger.hilt.android.AndroidEntryPoint
 import ir.ha.meproject.R
 import ir.ha.meproject.databinding.ActivityMainBinding
-import ir.ha.meproject.presentation.features.fragments.temp1.Temp1Fragment
+import ir.ha.meproject.presentation.features.fragments.users.UsersFragment
 import ir.ha.meproject.common.base.BaseActivity
 import ir.ha.meproject.common.extensions.addFragmentByAnimation
 
+
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     override fun initializing() {
@@ -22,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
 
-        addFragmentByAnimation(Temp1Fragment(), Temp1Fragment::class.java.simpleName,true,true,R.id.main)
+        addFragmentByAnimation(UsersFragment(), UsersFragment::class.java.simpleName,true,true,R.id.main)
 
     }
 
