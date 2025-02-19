@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MeProject"
 include(":app")
- 
+include(":mylibrary")

@@ -42,6 +42,7 @@ coreAnimation = "1.0.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
 
 
