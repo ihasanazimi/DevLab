@@ -217,7 +217,7 @@ dependencies {
     implementation(libs.stetho.js.rhino)
 
 
-    implementation ("ir.ha:mylibrary:1.0.0")
+    implementation ("ir.ha:mylibrary:1.1.0")
 
 
 

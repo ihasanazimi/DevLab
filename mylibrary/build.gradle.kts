@@ -53,7 +53,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "ir.ha"
             artifactId = "mylibrary"
-            version = "1.0.0"
+            version = "1.1.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -203,14 +203,14 @@ dependencies {
     // OkHttp Log
     //implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
-    // chucker
-    releaseImplementation (libs.chucker2)
-    debugImplementation (libs.chucker1)
+//    // chucker
+//    releaseImplementation (libs.chucker2)
+//    debugImplementation (libs.chucker1)
 
     //stetho
-    implementation(libs.stetho)
-    implementation(libs.stetho.okhttp3)
-    implementation(libs.stetho.js.rhino)
+//    implementation(libs.stetho)
+//    implementation(libs.stetho.okhttp3)
+//    implementation(libs.stetho.js.rhino)
 
 
 

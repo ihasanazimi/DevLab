@@ -1,8 +1,6 @@
 package ir.ha.mylibrary.di
 
 import android.content.Context
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -37,10 +35,6 @@ object NetworkModule {
             .writeTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
             .followSslRedirects(false)
-            .addInterceptor(
-                ChuckerInterceptor.Builder(context).redactHeaders("Auth-Token", "Bearer").build()
-            )
-            .addNetworkInterceptor(StethoInterceptor())
             .hostnameVerifier { hostname: String, session: SSLSession -> true }
             .build()
     }

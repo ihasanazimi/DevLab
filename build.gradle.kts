@@ -12,7 +12,7 @@ plugins {
 buildscript {
 
     repositories {
-        mavenLocal()
+        mavenLocal()  // اضافه کردن این خط
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")

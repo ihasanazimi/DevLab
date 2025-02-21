@@ -14,6 +14,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        mavenLocal()  // اضافه کردن این خط
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")
