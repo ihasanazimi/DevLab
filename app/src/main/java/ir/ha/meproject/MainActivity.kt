@@ -18,10 +18,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        startActivity(Intent(
-//            this@MainActivity,
-//            ir.ha.mylibrary.presentation.MainActivity::class.java
-//        ))
+        startActivity(Intent(
+            this@MainActivity,
+            ir.ha.mylibrary.presentation.MainActivity::class.java
+        ))
     }
 
 
