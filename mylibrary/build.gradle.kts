@@ -1,10 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library) // تغییر به library به‌جای application
     alias(libs.plugins.jetbrains.kotlin.android)
-    id ("dagger.hilt.android.plugin")
-    id ("kotlin-parcelize")
-    id ("androidx.navigation.safeargs.kotlin")
-    id ("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.devtools.ksp")
+    id("maven-publish") // اینجا نیازه
 }
 
 android {
@@ -13,9 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -26,17 +25,40 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 
     buildFeatures {
         viewBinding = true
+    }
+}
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "ir.ha"
+            artifactId = "mylibrary"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-package ir.ha.mylibrary
+package ir.ha.meproject
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
