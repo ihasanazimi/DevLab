@@ -29,6 +29,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
                 binding.loading.hide()
                 binding.tv.show()
                 binding.tv.text = users.first().name
+                showMessage("api called successfully")
             }
         }
 

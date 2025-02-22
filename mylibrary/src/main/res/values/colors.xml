@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="green">#8BC34A</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="backgroundColor">#fff</color>
@@ -8,4 +9,5 @@
     <color name="textColorNormality">#1D1D1D</color>
     <color name="textColorReverse">#EBEBEB</color>
     <color name="red">#E91E63</color>
+    <color name="blue">#00BCD4</color>
 </resources>
