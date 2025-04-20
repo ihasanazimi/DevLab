@@ -8,7 +8,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import ir.ha.meproject.common.security_and_permissions.requestPermission
+import ir.ha.meproject.common.security_and_permissions.isPermissionGranted
 
 /** add -> implementation("com.google.android.gms:play-services-location:21.2.0") */
 fun Activity.getCurrentLocation(callback: (Location?) -> Unit) {
@@ -28,13 +28,12 @@ fun Activity.getCurrentLocation(callback: (Location?) -> Unit) {
         }
     }
 
-    if (ir.ha.meproject.common.security_and_permissions.checkPermission(
-            this,
+ /*   if (isPermissionGranted(
             Manifest.permission.ACCESS_FINE_LOCATION
         )
     ) {
         requestPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
     }
-    /** add permission ->     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> */
-    fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+    *//** add permission ->     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> *//*
+    fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())*/
 }
