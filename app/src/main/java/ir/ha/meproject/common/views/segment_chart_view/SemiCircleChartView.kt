@@ -1,5 +1,4 @@
-package ir.ha.meproject.common.views
-
+package ir.ha.meproject.common.views.segment_chart_view
 
 import android.content.Context
 import android.graphics.*
@@ -33,15 +32,19 @@ class SegmentChartView @JvmOverloads constructor(
         val color: Int
     )
 
-
-    fun setSegments(newList : List<Segment>){
+    fun setSegments(newList: List<Segment>) {
         segments.clear()
         segments.addAll(newList)
         computeAngles()
+        invalidate()
     }
 
     private fun computeAngles() {
+        if (segments.isEmpty()) return
+
         val totalValue = segments.sumByDouble { it.value }
+        if (totalValue == 0.0) return
+
         val totalSpacing = (segments.size - 1) * spacingDegrees
         val totalAvailableDegrees = 180.0 - totalSpacing
 
@@ -69,11 +72,11 @@ class SegmentChartView @JvmOverloads constructor(
         if (width == 0 || height == 0) return
 
         val centerX = width / 2f
-        val centerY = height / 2f
-        val radius = min(width, height) / 3
+        val centerY = height.toFloat() // مرکز در پایین ویو
+        val radius = height.toFloat() // شعاع برابر ارتفاع
 
         segmentAngles.forEach { angle ->
-            drawWedgeSegment(canvas, centerX, centerY, radius.toFloat(), angle)
+            drawWedgeSegment(canvas, centerX, centerY, radius, angle)
         }
     }
 
@@ -87,27 +90,27 @@ class SegmentChartView @JvmOverloads constructor(
         val path = Path()
         val startAngle = Math.toRadians(angle.startAngle.toDouble()).toFloat()
         val endAngle = Math.toRadians(angle.endAngle.toDouble()).toFloat()
-        val angleDifferance = endAngle - startAngle
+        val angleDifference = endAngle - startAngle
 
         val innerRadius = radius * innerRadiusRatio
         val outerMiddleRadius = radius * 0.95f
         val innerMiddleRadius = radius * 0.85f
 
-        // Outer start points
+        // Outer start point
         val ossX = centerX + cos(startAngle) * outerMiddleRadius
         val ossY = centerY + sin(startAngle) * outerMiddleRadius
 
-        // Outer start control points
-        val osfAngle = angleInRadians(radius - outerMiddleRadius, radius, angleDifferance) + startAngle
+        // Outer start control point
+        val osfAngle = startAngle + angleInRadians(radius - outerMiddleRadius, radius, angleDifference)
         val osfX = centerX + cos(osfAngle) * radius
         val osfY = centerY + sin(osfAngle) * radius
 
-        // Outer end control points
-        val oesAngle = endAngle - angleInRadians(radius - outerMiddleRadius, radius, angleDifferance)
+        // Outer end control point
+        val oesAngle = endAngle - angleInRadians(radius - outerMiddleRadius, radius, angleDifference)
         val oesX = centerX + cos(oesAngle) * radius
         val oesY = centerY + sin(oesAngle) * radius
 
-        // Outer end points
+        // Outer end point
         val oefX = centerX + cos(endAngle) * outerMiddleRadius
         val oefY = centerY + sin(endAngle) * outerMiddleRadius
 
@@ -120,7 +123,12 @@ class SegmentChartView @JvmOverloads constructor(
         )
 
         path.arcTo(
-            RectF(centerX - radius, centerY - radius, centerX + radius, centerY + radius),
+            RectF(
+                centerX - radius,
+                centerY - radius,
+                centerX + radius,
+                centerY + radius
+            ),
             Math.toDegrees(osfAngle.toDouble()).toFloat(),
             Math.toDegrees((oesAngle - osfAngle).toDouble()).toFloat(),
             false
@@ -138,7 +146,7 @@ class SegmentChartView @JvmOverloads constructor(
         val issY = centerY + sin(endAngle) * innerMiddleRadius
         path.lineTo(issX, issY)
 
-        val isfAngle = endAngle - angleInRadians(innerMiddleRadius - innerRadius, innerRadius, angleDifferance)
+        val isfAngle = endAngle - angleInRadians(innerMiddleRadius - innerRadius, innerRadius, angleDifference)
         val isfX = centerX + cos(isfAngle) * innerRadius
         val isfY = centerY + sin(isfAngle) * innerRadius
 
@@ -149,12 +157,17 @@ class SegmentChartView @JvmOverloads constructor(
             isfY
         )
 
-        val iseAngle = startAngle + angleInRadians(innerMiddleRadius - innerRadius, innerRadius, angleDifferance)
+        val iseAngle = startAngle + angleInRadians(innerMiddleRadius - innerRadius, innerRadius, angleDifference)
         val iseX = centerX + cos(iseAngle) * innerRadius
         val iseY = centerY + sin(iseAngle) * innerRadius
 
         path.arcTo(
-            RectF(centerX - innerRadius, centerY - innerRadius, centerX + innerRadius, centerY + innerRadius),
+            RectF(
+                centerX - innerRadius,
+                centerY - innerRadius,
+                centerX + innerRadius,
+                centerY + innerRadius
+            ),
             Math.toDegrees(isfAngle.toDouble()).toFloat(),
             Math.toDegrees((iseAngle - isfAngle).toDouble()).toFloat(),
             false
@@ -175,14 +188,21 @@ class SegmentChartView @JvmOverloads constructor(
         canvas.drawPath(path, paint)
     }
 
-
-    private fun angleInRadians(arcLength: Float, radius: Float, angleDifferance : Float): Float {
-        return (arcLength / radius).coerceAtMost(angleDifferance / 2)
+    private fun angleInRadians(arcLength: Float, radius: Float, angleDifference: Float): Float {
+        return (arcLength / radius).coerceAtMost(angleDifference / 2)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val size = min(measuredWidth, measuredHeight)
-        setMeasuredDimension(size, size)
+        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
+        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+
+        val maxWidth = if (MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.UNSPECIFIED) widthSize else Int.MAX_VALUE
+        val maxHeight = if (MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED) heightSize else Int.MAX_VALUE
+
+        // Maintain aspect ratio (width:height = 2:1)
+        val desiredWidth = min(maxWidth, maxHeight * 2)
+        val desiredHeight = desiredWidth / 2
+
+        setMeasuredDimension(desiredWidth, desiredHeight)
     }
 }
