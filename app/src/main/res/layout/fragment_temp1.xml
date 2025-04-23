@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <ir.ha.meproject.common.views.segment_chart_view.SegmentChartView
+        <ir.hasanazimi.me.common.views.segment_chart_view.SegmentChartView
             android:id="@+id/segmentChart"
             android:layout_width="300dp"
             android:layout_height="200dp"
