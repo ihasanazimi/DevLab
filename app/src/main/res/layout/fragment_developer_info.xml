@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerFrame">
 
-        <ir.ha.meproject.common.views.CircleImageView
+        <ir.hasanazimi.me.common.views.CircleImageView
             android:id="@+id/profileProfileIV"
             android:layout_width="@dimen/space_128"
             android:layout_height="@dimen/space_128"

@@ -1,4 +1,4 @@
-package ir.ha.meproject.presentation.features.fragments.developer_info
+package ir.hasanazimi.me.presentation.features.fragments.developer_info
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -8,9 +8,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import ir.ha.meproject.common.base.BaseViewModel
-import ir.ha.meproject.model.data.developer_info.DeveloperInfo
-import ir.ha.meproject.model.use_cases.DeveloperInfoUseCase
+import ir.hasanazimi.me.common.base.BaseViewModel
+import ir.hasanazimi.me.data.model.data.developer_info.DeveloperInfo
+import ir.hasanazimi.me.data.model.use_cases.DeveloperInfoUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch

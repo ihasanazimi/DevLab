@@ -1,14 +1,14 @@
-package ir.ha.meproject.presentation
+package ir.hasanazimi.me.presentation
 
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
-import ir.ha.meproject.R
-import ir.ha.meproject.common.base.BaseActivity
-import ir.ha.meproject.common.extensions.replaceFragmentByAnimation
-import ir.ha.meproject.databinding.ActivityMainBinding
-import ir.ha.meproject.presentation.features.fragments.developer_info.DeveloperInfoFragment
+import ir.hasanazimi.me.common.base.BaseActivity
+import ir.hasanazimi.me.R
+import ir.hasanazimi.me.common.extensions.addFragmentByAnimation
+import ir.hasanazimi.me.databinding.ActivityMainBinding
+import ir.hasanazimi.me.pagination.PaginationFragment
 
 
 @AndroidEntryPoint

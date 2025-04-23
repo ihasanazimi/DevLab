@@ -1,4 +1,4 @@
-package ir.ha.meproject.common.base
+package ir.hasanazimi.me.common.base
 
 import android.content.Context
 import android.os.Bundle
@@ -6,11 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import ir.ha.meproject.R
-import ir.ha.meproject.common.more.ENGLISH_LANGUAGE_CODE
-import ir.ha.meproject.common.more.PERSIAN_LANGUAGE_CODE
-import ir.ha.meproject.common.more.localizedContext
-import ir.ha.meproject.common.more.SnackBarHelper
+import ir.hasanazimi.me.R
+import ir.hasanazimi.me.common.more.ENGLISH_LANGUAGE_CODE
+import ir.hasanazimi.me.common.more.SnackBarHelper
+import ir.hasanazimi.me.common.more.localizedContext
 import java.util.Locale
 
 abstract class BaseActivity<VB : ViewBinding>(
