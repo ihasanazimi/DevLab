@@ -7,4 +7,5 @@
     <color name="snackBar_BackgroundColor">#202020</color>
     <color name="textColorNormality">#1D1D1D</color>
     <color name="textColorReverse">#EBEBEB</color>
+    <color name="blue">#3F51B5</color>
 </resources>

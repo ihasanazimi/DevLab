@@ -3,6 +3,7 @@
     <style name="Base.Theme.Me" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="fontFamily">@font/dirooz</item>
     </style>
 
     <style name="Theme.Me" parent="Base.Theme.Me" />

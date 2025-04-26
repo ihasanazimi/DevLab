@@ -5,41 +5,87 @@
     android:layout_height="match_parent"
     android:layout_gravity="center">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:orientation="vertical">
 
-        <ir.hasanazimi.me.common.views.segment_chart_view.SegmentChartView
-            android:id="@+id/segmentChart"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal">
 
+            <ir.hasanazimi.me.common.views.segment_chart_view.SegmentChartView
+                android:id="@+id/segmentChart"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_gravity="top" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="42.dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space_8"
+                    android:text="کل پیش کش ها(ریال)" />
+
+                <TextView
+                    android:id="@+id/cashBackAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="32.dp">
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="vertical">
 
-            <TextView
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/space_8"
+                android:hint="value of segment (ex : 40,000)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="add new segment by random color" />
+
+
+            <Button
+                android:id="@+id/clearSegments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/space_16"
-                android:text="کل پیش کش ها(ریال)" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5,000,0000"
-                android:textStyle="bold" />
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="clear Segments" />
 
         </LinearLayout>
 
-    </FrameLayout>
-
+    </LinearLayout>
 
 </FrameLayout>
