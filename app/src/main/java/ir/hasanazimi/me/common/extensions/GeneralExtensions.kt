@@ -31,11 +31,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import ir.hasanazimi.me.R
 import kotlinx.coroutines.CoroutineScope
@@ -53,32 +51,6 @@ import kotlin.reflect.KClass
 private const val TAG = "EXTENSIONS_TAG"
 
 private val viewScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
-
-fun AppCompatActivity.addFragmentByAnimation(
-    fragment: Fragment,
-    tag: String,
-    addToBackStack: Boolean,
-    customAnimations: Boolean,
-    containerViewId: Int,
-    commitAllowingStateLoss: Boolean = false
-) {
-    val fragmentTransaction = supportFragmentManager.beginTransaction()
-    if (customAnimations) {
-        fragmentTransaction.setCustomAnimations(
-            R.anim.enter_fragment_anim,
-            R.anim.exit_fragment_animation,
-            R.anim.pop_enter_fragment_animation,
-            R.anim.pop_exit_fragment_animation
-        )
-    }
-    if (addToBackStack) fragmentTransaction.addToBackStack(tag)
-    fragmentTransaction.add(containerViewId, fragment, tag)
-    if (commitAllowingStateLoss) fragmentTransaction.commitAllowingStateLoss()
-    else fragmentTransaction.commit()
-}
-
-
-
 
 
 fun Fragment.addFragmentByAnimation(
@@ -192,10 +164,6 @@ fun EditText.setEditTextJustReadOnly(value: Boolean, inputType: Int = InputType.
 }
 
 
-fun RecyclerView.scrollToTop() {
-    if(canScrollVertically(-1)) smoothScrollToPosition(0)
-}
-
 fun ViewGroup.showByAnimation() {
     val transition = Fade()
     transition.duration = 500
@@ -303,7 +271,7 @@ fun getApplicationVersion(context : Context) : Pair<String , Int>{
     var versionCode = -1
     try {
         val pInfo: PackageInfo = context.packageManager.getPackageInfo(context.getPackageName(), 0)
-        versionName = pInfo.versionName
+        versionName = pInfo.versionName.toString()
         versionCode = pInfo.versionCode
     } catch (e: PackageManager.NameNotFoundException) { e.printStackTrace() }
     return Pair(versionName , versionCode)

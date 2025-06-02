@@ -1,41 +1,51 @@
 package ir.hasanazimi.me.common.file
 
-import android.R
 import android.content.Context
 import android.graphics.Bitmap
-import com.bumptech.glide.Glide
-import kotlinx.coroutines.DelicateCoroutinesApi
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
+import ir.hasanazimi.me.R
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-@DelicateCoroutinesApi
-fun saveUserCoverImage(context : Context, imageUrl : String, savePath : String){
-    // save profile cover into storage and save it on prefFile
+suspend fun saveUserCoverImage(context: Context, imageUrl: String, savePath: String) {
     if (imageUrl.isNotEmpty() && savePath.isNotEmpty()) {
-        GlobalScope.launch(Dispatchers.IO) {
-            saveImage(
-                image = Glide.with(context)
-                    .asBitmap()
-                    .load(imageUrl)
-                    .placeholder(R.drawable.progress_indeterminate_horizontal)
-                    .error(R.drawable.stat_notify_error)
-                    .submit()
-                    .get(),
-                savePath = savePath
-            )
+        withContext(Dispatchers.IO) {
+            try {
+                val loader = ImageLoader(context)
+                val request = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .placeholder(R.drawable.baseline_error_outline_24)
+                    .error(R.drawable.baseline_error_outline_24)
+                    .build()
+
+                val result = loader.execute(request)
+                if (result is SuccessResult) {
+                    val bitmap =
+                        (result.drawable as android.graphics.drawable.BitmapDrawable).bitmap
+                    saveImage(
+                        image = bitmap,
+                        savePath = savePath
+                    )
+                } else {
+                    throw Exception("Failed to load image with Coil")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }
 
 
-private fun saveImage(image: Bitmap, savePath : String) {
+private fun saveImage(image: Bitmap, savePath: String) {
     var savedImagePath: String? = null
     val imageFileName = "JPEG_" + "YOUR_IMAGE_DOWNLOADED" + ".jpg"
-    val storageDir = File(savePath , "userCoverDir")
+    val storageDir = File(savePath, "userCoverDir")
     var success = true
     if (!storageDir.exists()) success = storageDir.mkdirs()
     if (success) {
@@ -45,6 +55,8 @@ private fun saveImage(image: Bitmap, savePath : String) {
             val fOut: OutputStream = FileOutputStream(imageFile)
             image.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
             fOut.close()
-        } catch (e: Exception) { e.printStackTrace() }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

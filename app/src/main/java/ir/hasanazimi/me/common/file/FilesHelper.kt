@@ -16,12 +16,16 @@ private const val TAG = "FileUtils_TAG"
 
 
 object ImagePicker {
+
     const val IMAGE_PICKER_REQUEST_CODE = 123
     fun pickImage(activity: Activity) {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/*"
         activity.startActivityForResult(intent, IMAGE_PICKER_REQUEST_CODE)
     }
+
+
+
     /**
      *
      * Usage :

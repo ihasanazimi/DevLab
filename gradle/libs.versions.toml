@@ -1,95 +1,74 @@
 [versions]
-agp = "8.4.2"
-archComponentVersion = "2.7.0"
-biometric = "1.1.0"
-coreSplashscreen = "1.0.1"
-databindingRuntime = "8.5.1"
 datastorePreferences = "1.1.1"
-glide = "4.16.0"
 gson = "2.10.1"
-hiltAndroid = "2.51"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
 kotlinReflect = "1.9.20"
 kotlinxCoroutinesAndroid = "1.8.0"
 legacySupportV4 = "1.0.0"
-chucker_libraryNoOp = "4.0.0"
-lifecycleExtensions = "2.2.0"
-lottie = "5.2.0"
-material = "1.12.0"
-activity = "1.9.0"
-constraintlayout = "2.1.4"
-navigationVersion = "2.7.7"
-pagingVersion = "3.3.0"
-playServicesLocation = "21.3.0"
-retrofit = "2.9.0"
-roomVersion = "2.6.1"
-rules = "1.6.1"
+material3 = "1.2.0"
 rxandroid = "3.0.0"
 rxjava = "3.1.5"
 rxkotlin = "3.0.1"
+agp = "8.9.0"
+kotlin = "2.0.21"
+coreKtx = "1.10.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+lifecycleRuntimeKtx = "2.6.1"
+activityCompose = "1.10.1"
+composeBom = "2024.09.00"
+playServicesLocation = "21.3.0"
+retrofit = "2.9.0"
+chucker_libraryNoOp = "4.0.0"
 stetho = "1.5.1"
-viewmodel = "1.1.1"
-kspVersion = "1.9.22-1.0.17"
-coreAnimation = "1.0.0"
+kspVersion = "2.0.21"
+hiltAndroid = "2.51"
+rules = "1.6.1"
+biometric = "1.1.0"
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+#jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 
 
 [libraries]
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
 chucker1 = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker_libraryNoOp" }
 chucker2 = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker_libraryNoOp" }
-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
-androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
-androidx-databinding-runtime = { module = "androidx.databinding:databinding-runtime", version.ref = "databindingRuntime" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4" }
-androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "archComponentVersion" }
-androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
-androidx-lifecycle-livedata-core-ktx = { module = "androidx.lifecycle:lifecycle-livedata-core-ktx", version.ref = "archComponentVersion" }
-androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "archComponentVersion" }
-androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "archComponentVersion" }
-androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "archComponentVersion" }
-androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationVersion" }
-androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationVersion" }
-androidx-paging-common-ktx = { module = "androidx.paging:paging-common-ktx", version.ref = "pagingVersion" }
-androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingVersion" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
-androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomVersion" }
 androidx-rules = { module = "androidx.test:rules", version.ref = "rules" }
-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 converter-jackson = { module = "com.squareup.retrofit2:converter-jackson", version.ref = "retrofit" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 
 
 
 #noinspection SimilarGradleDependency
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 
 #noinspection SimilarGradleDependency
@@ -101,6 +80,4 @@ rxkotlin = { module = "io.reactivex.rxjava3:rxkotlin", version.ref = "rxkotlin" 
 stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
 stetho-js-rhino = { module = "com.facebook.stetho:stetho-js-rhino", version.ref = "stetho" }
 stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
-viewmodel = { module = "android.arch.lifecycle:viewmodel", version.ref = "viewmodel" }
-androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
 

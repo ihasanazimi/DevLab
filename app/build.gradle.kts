@@ -4,17 +4,19 @@ plugins {
     id ("dagger.hilt.android.plugin")
     id ("kotlin-parcelize")
     id ("androidx.navigation.safeargs.kotlin")
-    id ("com.google.devtools.ksp")
+    /*id ("com.google.devtools.ksp")*/
+    id("kotlin-kapt")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "ir.hasanazimi.me"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "ir.hasanazimi.me"
+        applicationId = "ir.hasanazimi.jetpackcompose.me"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -43,138 +45,79 @@ android {
         }
     }
 
-    
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
-        viewBinding = true
+        compose = true
     }
-
-//    kapt {
-//        correctErrorTypes = true
-//    }
-
-//    /** for pdf generator */
-//    packagingOptions {
-//        exclude("META-INF/DEPENDENCIES")
-//    }
 
 }
 
 dependencies {
 
-    // test
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // base
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
-
-    implementation(libs.androidx.core.animation)
-
-
-    // Data Binding Runtime
-    implementation(libs.androidx.databinding.runtime)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     // Google MaterialDesign
-    implementation(libs.material)
+    implementation(libs.material3)
 
     // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.android)
-
-    // Architecture lifecycles
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.common.java8)
-    implementation(libs.androidx.lifecycle.livedata.core.ktx)
-    implementation(libs.viewmodel)
-    implementation(libs.androidx.lifecycle.extensions)
 
     /*  Dagger Hilt  */
     implementation(libs.androidx.legacy.support.v4)
     androidTestImplementation(libs.androidx.rules)
     implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
 
-    // Glide ImageLoader
-    implementation(libs.glide)
-    annotationProcessor(libs.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    //Event Bus
-    /* implementation("org.greenrobot:eventbus:3.3.1") */
+    implementation("org.jsoup:jsoup:1.17.2")
 
-    // room dataBase
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    androidTestImplementation(libs.androidx.room.testing)
 
-    // Nav Component
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
-    // Circle Image View
-    //implementation("de.hdodenhof:circleimageview:3.1.0")
+/*
+    implementation ("androidx.compose.material3:material3:1.2.0")
+*/
 
-    // lottie animations
-    implementation(libs.lottie)
+    implementation ("androidx.navigation:navigation-compose:2.8.9")
 
-    // SharedPreferences (DataStore)
-    implementation(libs.androidx.datastore.preferences)
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
 
-    // Splash
-    implementation(libs.androidx.core.splashscreen)
+    implementation("com.google.code.gson:gson:2.10.1")
 
-    // Pagination
-    implementation(libs.androidx.paging.common.ktx)
-    implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.androidx.paging.runtime.ktx)
-    testImplementation(libs.androidx.paging.common.ktx)
-
-    // Kotlin Reflect
-    implementation(libs.kotlin.reflect)
-
-    // Multidex
-    //implementation("com.android.support:multidex:1.0.3")
-
-    // PDF View
-    //implementation("com.dmitryborodin:pdfview-android:1.1.0")
-
-    // persian datePicker
-    //implementation("com.github.aliab:Persian-Date-Picker-Dialog:1.8.0")
-
-    // screen shot
-    //implementation("com.github.nisrulz:screenshott:2.0.0")
-
-    // Biometric (Fingerprint)
-    implementation(libs.androidx.biometric)
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
     // GoogleServices (location)
     implementation(libs.play.services.location)
-
-    // number picker btn style
-    //implementation("it.sephiroth.android.library:number-sliding-picker:1.1.1")
-
-    // GoogleServices (fireBase)
-    //implementation("com.google.firebase:firebase-messaging:23.4.1")
 
     // Retrofit by converters
     implementation (libs.retrofit) // okHttp
     implementation (libs.converter.gson) // GSON Converter
     implementation (libs.converter.jackson) // Jackson Converter
     implementation (libs.adapter.rxjava3) // RX3 adapter
-    /* implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0") */ // RX2 adapter
 
     // GSON
     implementation(libs.gson)
@@ -184,28 +127,13 @@ dependencies {
     implementation (libs.rxkotlin)
     implementation (libs.rxandroid)
 
-    // RxJava/RxAndroid Version 2
-    /* implementation("io.reactivex.rxjava2:rxjava:2.2.9")
-    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
-    */
 
+    // SharedPreferences (DataStore)
+    implementation(libs.androidx.datastore.preferences)
 
-    // Koin
-    //val koinVersion= "3.5.0"
-    //implementation("io.insert-koin:koin-android:$koinVersion")
+    // Kotlin Reflect
+    implementation(libs.kotlin.reflect)
 
-    // Fresco
-    //implementation("com.facebook.fresco:fresco:2.6.0")
-
-    // Picasso
-    // implementation("com.squareup.picasso:picasso:2.71828")
-
-    // Coil ImageLoader
-    //implementation("io.coil-kt:coil:2.0.0-rc03")
-
-
-    // OkHttp Log
-    //implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     // chucker
     releaseImplementation (libs.chucker2)
@@ -217,6 +145,8 @@ dependencies {
     implementation(libs.stetho.js.rhino)
 
 
+    // Biometric (Fingerprint)
+    implementation(libs.androidx.biometric)
 
 
 }

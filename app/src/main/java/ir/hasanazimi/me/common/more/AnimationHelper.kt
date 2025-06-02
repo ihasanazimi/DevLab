@@ -176,59 +176,6 @@ object AnimationHelper {
 
 
 
-
-    fun View.animateFromBottomToTop(
-        startOffset: Float = 600f,
-        duration: Long = 500L,
-        startDelay: Long = 100,
-        onStart: (() -> Unit)? = null,
-        onEnd: (() -> Unit)? = null,
-        onCancellation: (() -> Unit)? = null
-    ) {
-
-
-        // Set initial state for translation
-        this.translationY = startOffset
-
-        // Translation animation (from startOffset to its original position)
-        val translateAnimator = ObjectAnimator.ofFloat(this, "translationY", 0f).apply {
-            this.duration = duration
-            this.startDelay = startDelay
-            interpolator = DecelerateInterpolator() // Makes the animation smooth
-        }
-
-        // Start the animation
-        translateAnimator.addListener(object : AnimatorListenerAdapter(), androidx.core.animation.Animator.AnimatorListener {
-
-            override fun onAnimationStart(animation: androidx.core.animation.Animator) {
-                Log.i(TAG_ANIMATION, "onAnimationStart: ")
-                onStart?.invoke()
-                this@animateFromBottomToTop.enableHardwareLayer()
-            }
-
-            override fun onAnimationEnd(animation: androidx.core.animation.Animator) {
-                Log.i(TAG_ANIMATION, "onAnimationEnd: ")
-                onEnd?.invoke()
-                this@animateFromBottomToTop.disableHardwareLayer()
-            }
-
-            override fun onAnimationCancel(animation: androidx.core.animation.Animator) {
-                Log.i(TAG_ANIMATION, "onAnimationCancel: ")
-                onCancellation?.invoke()
-                this@animateFromBottomToTop.disableHardwareLayer()
-            }
-
-            override fun onAnimationRepeat(animation: androidx.core.animation.Animator) {
-                Log.i(TAG_ANIMATION, "onAnimationRepeat: ")
-            }
-
-        })
-        translateAnimator.start()
-    }
-
-
-
-
     // انیمیشن چرخش با ObjectAnimator از androidx
     fun rotate(view: View, duration: Long, fromDegrees: Float, toDegrees: Float) {
         val rotation = ObjectAnimator.ofFloat(view, View.ROTATION, fromDegrees, toDegrees)

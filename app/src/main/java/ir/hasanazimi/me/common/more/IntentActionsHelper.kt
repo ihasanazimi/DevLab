@@ -80,4 +80,15 @@ class IntentActionsHelper(private val activity: Activity) {
             Toast.makeText(activity, "Telegram not Installed", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun shareContent(message: String, url: String) {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "$message\n$url")
+            type = "text/plain"
+        }
+        activity.startActivity(Intent.createChooser(shareIntent, "اشتراک با"))
+    }
+
+
 }

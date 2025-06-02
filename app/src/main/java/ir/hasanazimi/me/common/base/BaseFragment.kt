@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import ir.hasanazimi.me.R
-import ir.hasanazimi.me.presentation.MainActivity
 import ir.hasanazimi.me.common.extensions.hideKeyboard
-import ir.hasanazimi.me.common.more.SnackBarHelper
+import ir.hasanazimi.me.presentation.MainActivity
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -56,16 +55,10 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     fun showErrorMessage(message: String) {
         Log.e(TAG, "showErrorMessage - $message")
-        SnackBarHelper.showSnackBar(
-            requireActivity() , message, R.drawable.baseline_error_outline_24
-        )
     }
 
     fun showMessage(message: String, icon: Int = R.drawable.baseline_done_24) {
         Log.e("TAG", "showMessage: ")
-        SnackBarHelper.showSnackBar(
-          requireActivity(), message, icon
-        )
     }
 
     fun onBackPressed(){

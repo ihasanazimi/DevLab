@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -68,13 +67,6 @@ fun Activity.setStatusBarColor(color: Int, shouldBeLight: Boolean = true) {
 }
 
 
-fun changeTheme(isDarkTheme: Boolean) {
-    Log.i("TAG", "changeTheme function called , isDarkTheme is $isDarkTheme")
-    if (isDarkTheme) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-}
-
-
 
 fun Context.copyToClipboard(text: String){
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
@@ -87,19 +79,6 @@ fun Context.isEnabledDarkMode() : Boolean{
     return darkModeFlags == Configuration.UI_MODE_NIGHT_YES //Check if the Dark Mode is On
 }
 
-fun Context.switchToDarkModeIfNeeded(){
-    Log.i("", "switchToDarkModeIfNeeded - dakMode is ${this.isEnabledDarkMode()}")
-    if (this.isEnabledDarkMode()) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) //Switch on the dark mode.
-    }
-}
-
-fun Context.switchToLightModeIfNeeded(){
-    Log.i("", "switchToLightModeIfNeeded - dakMode is ${this.isEnabledDarkMode()}")
-    if (!this.isEnabledDarkMode()) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) //Switch off the dark mode.
-    }
-}
 
 
 fun Context.isDarkThemeOn(context: Context): Boolean {
