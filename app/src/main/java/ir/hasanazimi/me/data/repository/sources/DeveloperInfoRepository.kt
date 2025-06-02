@@ -1,27 +1,37 @@
-package ir.hasanazimi.me.data.model.repositories.developer_info
+package ir.hasanazimi.me.data.repository.sources
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ir.hasanazimi.me.data.model.data.developer_info.DeveloperInfo
-import ir.hasanazimi.me.data.model.network.WebServices
+import ir.hasanazimi.me.data.entities.developer_info.DeveloperInfo
+import ir.hasanazimi.me.data.repository.remote.web_services.DeveloperWebServices
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
+interface DeveloperInfoRepository  {
+
+    suspend fun getDeveloperInfo() : Flow<DeveloperInfo>
+
+    fun getDeveloperInfoByRx() : Observable<DeveloperInfo>
+
+}
+
+
+
 class DeveloperInfoRepositoryImpl @Inject constructor(
-    private val webServices: WebServices,
+    private val developerWebServices: DeveloperWebServices,
 ) : DeveloperInfoRepository {
 
 
     override suspend fun getDeveloperInfo(): Flow<DeveloperInfo> = flow {
-        emit(webServices.getDeveloperInformation())
+        emit(developerWebServices.getDeveloperInformation())
     }
 
 
     override fun getDeveloperInfoByRx(): Observable<DeveloperInfo> {
-        return webServices.getDeveloperInformationByRx().toObservable()
+        return developerWebServices.getDeveloperInformationByRx().toObservable()
             .subscribeOn(Schedulers.io()) // Perform network request on IO thread
             .onErrorReturn { // Handle errors and provide fallback
                 DeveloperInfo()
@@ -34,3 +44,5 @@ class DeveloperInfoRepositoryImpl @Inject constructor(
             }
     }
 }
+
+

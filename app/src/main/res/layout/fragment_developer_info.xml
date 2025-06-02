@@ -54,7 +54,7 @@
             android:layout_height="@dimen/space_128"
             app:scaleType="center_crop"
             app:cornerRadius="@dimen/space_16"
-            app:strokeColor="@color/blue"
+            app:strokeColor="@color/biometric_error_color"
             app:strokeWidth="2dp"
             app:isCircular="false"
             tools:src="@drawable/ic_failed" />
@@ -90,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_16"
-        app:cardBackgroundColor="@color/blue"
+        app:cardBackgroundColor="@color/biometric_error_color"
         app:cardCornerRadius="@dimen/space_16"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Feedback"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/background" />
 
             </LinearLayout>
 
@@ -121,7 +121,7 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:alpha="0.5"
-                android:background="@color/white" />
+                android:background="@color/background" />
 
 
             <LinearLayout
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Projects"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/background" />
 
             </LinearLayout>
 

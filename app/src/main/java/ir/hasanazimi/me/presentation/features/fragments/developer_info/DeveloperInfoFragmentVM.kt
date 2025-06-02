@@ -9,8 +9,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import ir.hasanazimi.me.common.base.BaseViewModel
-import ir.hasanazimi.me.data.model.data.developer_info.DeveloperInfo
-import ir.hasanazimi.me.data.model.use_cases.DeveloperInfoUseCase
+import ir.hasanazimi.me.data.entities.developer_info.DeveloperInfo
+import ir.hasanazimi.me.domain.DeveloperInfoUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch

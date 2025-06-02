@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.hasanazimi.me.R
 import ir.hasanazimi.me.common.base.BaseFragment
 import ir.hasanazimi.me.common.extensions.withNotNull
-import ir.hasanazimi.me.data.model.data.developer_info.DeveloperInfo
+import ir.hasanazimi.me.data.entities.developer_info.DeveloperInfo
 import ir.hasanazimi.me.databinding.FragmentDeveloperInfoBinding
 import kotlinx.coroutines.launch
 

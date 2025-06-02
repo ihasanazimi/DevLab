@@ -8,7 +8,7 @@ import ir.hasanazimi.me.R
 import ir.hasanazimi.me.common.base.BaseActivity
 import ir.hasanazimi.me.common.extensions.addFragmentByAnimation
 import ir.hasanazimi.me.databinding.ActivityMainBinding
-import ir.hasanazimi.me.pagination.PaginationFragment
+import ir.hasanazimi.me.presentation.features.fragments.pagination.PaginationFragment
 
 
 @AndroidEntryPoint

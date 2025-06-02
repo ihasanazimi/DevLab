@@ -1,4 +1,4 @@
-package ir.hasanazimi.me.data.model.data.developer_info
+package ir.hasanazimi.me.data.entities.developer_info
 
 data class Resume(
     val organizes: List<Organize> = arrayListOf()

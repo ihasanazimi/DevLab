@@ -1,4 +1,4 @@
-package ir.hasanazimi.me.pagination
+package ir.hasanazimi.me.presentation.features.fragments.pagination
 
 import android.util.Log
 import androidx.core.view.isVisible
