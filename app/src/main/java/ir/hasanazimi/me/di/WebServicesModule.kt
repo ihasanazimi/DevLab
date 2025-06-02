@@ -15,7 +15,7 @@ object WebServicesModule {
 
     @Singleton
     @Provides
-    fun provideWeatherWebServices(@Named("regular") retrofit: Retrofit.Builder): XWebService {
+    fun provideXWebServices(@Named("regular") retrofit: Retrofit.Builder): XWebService {
         return retrofit.build().create(XWebService::class.java)
     }
 
