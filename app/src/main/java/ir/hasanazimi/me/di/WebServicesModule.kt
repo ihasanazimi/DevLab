@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ir.hasanazimi.me.data.repository.remote.web_services.DeveloperWebServices
 import ir.hasanazimi.me.data.repository.remote.web_services.XWebService
 import retrofit2.Retrofit
 import javax.inject.Named
