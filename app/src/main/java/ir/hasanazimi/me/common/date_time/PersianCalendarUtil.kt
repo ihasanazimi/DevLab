@@ -49,11 +49,11 @@ object PersianCalendarUtils {
      * @return long
      */
     fun persianToJulian(year: Long, month: Int, day: Int): Long {
-        return 365L * ((PersianCalendarUtils.ceil(
+        return 365L * ((ceil(
             (year - 474L).toDouble(),
             2820.0
         ) + 474L) - 1L) + (floor(
-            (682L * (PersianCalendarUtils.ceil(
+            (682L * (ceil(
                 (year - 474L).toDouble(),
                 2820.0
             ) + 474L) - 110L) / 2816.0
