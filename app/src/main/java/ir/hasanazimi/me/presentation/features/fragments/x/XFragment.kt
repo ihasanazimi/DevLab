@@ -1,16 +1,19 @@
-package ir.hasanazimi.me.presentation.features.fragments.temp1
+package ir.hasanazimi.me.presentation.features.fragments.x
 
 import android.view.animation.LinearInterpolator
 import androidx.core.graphics.toColorInt
+import dagger.hilt.android.AndroidEntryPoint
 import ir.hasanazimi.me.R
 import ir.hasanazimi.me.common.base.BaseFragment
 import ir.hasanazimi.me.common.extensions.getAmountFormatBySeparator
 import ir.hasanazimi.me.common.extensions.showToast
 import ir.hasanazimi.me.common.extensions.singleClick
 import ir.hasanazimi.me.common.views.segment_chart_view.SegmentChartView
-import ir.hasanazimi.me.databinding.FragmentTemp1Binding
+import ir.hasanazimi.me.databinding.FragmentXBinding
 
-class Temp1Fragment : BaseFragment<FragmentTemp1Binding>(FragmentTemp1Binding::inflate) {
+
+@AndroidEntryPoint
+class XFragment : BaseFragment<FragmentXBinding>(FragmentXBinding::inflate) {
 
     override fun initializing() {
         super.initializing()
