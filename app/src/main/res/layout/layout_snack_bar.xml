@@ -23,7 +23,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
-            app:tint="@color/textColorReverse"
+            app:tint="@color/on_background_dark"
             tools:src="@drawable/baseline_done_24" />
 
         <TextView
@@ -31,11 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/textColorReverse"
             android:justificationMode="inter_word"
+            android:textColor="@color/on_background_dark"
             android:textSize="16sp"
-            tools:text="this is test message!"
-            tools:targetApi="o" />
+            tools:targetApi="o"
+            tools:text="this is test message!" />
 
     </LinearLayout>
 

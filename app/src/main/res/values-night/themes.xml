@@ -1,8 +1,109 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.Me" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="fontFamily">@font/dirooz</item>
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+
+        <!-- Background and surface -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+
+        <!-- Error color -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+
+        <!-- Typography -->
+        <item name="fontFamily">@font/yekan</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Me.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Me.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Me.Headline3</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Me.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Me.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Me.Caption</item>
+
+        <!-- Shapes -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Me.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Me.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Me.LargeComponent</item>
+
+        <!-- Component styles -->
+        <item name="materialButtonStyle">@style/Widget.Me.Button</item>
+        <item name="cardViewStyle">@style/Widget.Me.CardView</item>
+        <item name="textInputStyle">@style/Widget.Me.TextInputLayout</item>
+    </style>
+
+    <!-- Typography styles -->
+    <style name="TextAppearance.Me.Headline1" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+    <style name="TextAppearance.Me.Headline2" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+    <style name="TextAppearance.Me.Headline3" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+    <style name="TextAppearance.Me.Body1" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/on_background</item>
+    </style>
+    <style name="TextAppearance.Me.Body2" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+    <style name="TextAppearance.Me.Caption" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/yekan</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
+    </style>
+
+    <!-- Shape styles -->
+    <style name="ShapeAppearance.Me.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShapeAppearance.Me.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    <style name="ShapeAppearance.Me.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Component styles -->
+    <style name="Widget.Me.Button" parent="Widget.Material3.Button">
+        <item name="android:fontFamily">@font/yekan</item>
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Me.SmallComponent</item>
+    </style>
+    <style name="Widget.Me.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Me.MediumComponent</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    <style name="Widget.Me.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/surface</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Me.SmallComponent</item>
     </style>
 </resources>
