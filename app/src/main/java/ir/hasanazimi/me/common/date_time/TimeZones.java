@@ -1,4 +1,4 @@
-package ir.hasanazimi.me.common.date_time.tool;
+package ir.hasanazimi.me.common.date_time;
 
 import java.util.TimeZone;
 

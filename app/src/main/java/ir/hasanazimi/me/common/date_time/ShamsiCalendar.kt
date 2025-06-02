@@ -3,7 +3,7 @@ package ir.hasanazimi.me.common.date_time
 import java.util.Date
 import java.util.Locale
 
-class PersianCalendar1 {
+class ShamsiCalendar {
     var strWeekDay = ""
     var strMonth = ""
     var date = 0
@@ -22,7 +22,7 @@ class PersianCalendar1 {
     companion object{
         fun shamsiDate() : String{
             val loc = Locale("en_US")
-            val sc = PersianCalendar1()
+            val sc = ShamsiCalendar()
             return sc.year.toString() + "/" + String.format(
                 loc, "%02d",
                 sc.month

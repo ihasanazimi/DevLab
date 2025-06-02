@@ -1,77 +1,79 @@
 package ir.hasanazimi.me.common.base
 
-import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
-import androidx.viewbinding.ViewBinding
-import ir.hasanazimi.me.common.extensions.hideKeyboard
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.window.DialogProperties
 
-abstract class BaseDialog<VB : ViewBinding>(
-    private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
-): DialogFragment() {
-
-    val TAG = this::class.java.simpleName
-
-    private var _binding: VB? = null
-    protected val binding: VB
-        get() = _binding ?: throw IllegalStateException("Fragment view not created yet.")
-
-
-    val parentActivity by lazy { (requireActivity()) }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = bindingInflater.invoke(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializing()
-        uiConfig()
-        listeners()
-        observers()
-    }
-
-
-    open fun initializing(){
-        hideKeyboard(view)
-        Log.i(TAG, "initializing: ")
-    }
-
-    open fun uiConfig(){
-        Log.i(TAG, "uiConfig: ")
-    }
-    
-    open fun listeners(){
-        Log.i(TAG, "listeners: ")
-    }
-    
-    open fun observers(){
-        Log.i(TAG, "observers: ")
-    }
-
-    override fun onDestroyView() {
-        Log.i(TAG, "onDestroyView: ")
-        super.onDestroyView()
-        _binding = null
-    }
+@Composable
+fun BaseDialog(
+    onDismissRequest: () -> Unit,
+    title: String? = null,
+    confirmText: String? = null,
+    onConfirm: () -> Unit = {},
+    dismissText: String? = null,
+    onDismiss: () -> Unit = {},
+    properties: DialogProperties = DialogProperties(),
+    content: @Composable () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismissRequest,
+        title = title?.let {
+            {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.titleLarge,
+                    textAlign = TextAlign.Start,
+                )
+            }
+        },
+        confirmButton = {
+            confirmText?.let {
+                TextButton(onClick = onConfirm) {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                }
+            }
+        },
+        dismissButton = {
+            dismissText?.let {
+                TextButton(onClick = onDismiss) {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                }
+            }
+        },
+        text = { content() },
+        properties = properties
+    )
+}
 
 
-    open fun onScrollToTop() {}
-
-
-    override fun onStart() {
-        super.onStart()
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        val width = displayMetrics.widthPixels
-        val height = displayMetrics.heightPixels
-
-        dialog?.window?.setLayout(width-92, ViewGroup.LayoutParams.WRAP_CONTENT)
+@Preview
+@Composable
+private fun BaseDialogPreview() {
+    Surface {
+        BaseDialog(
+            onDismissRequest = { /*dismiss dialog*/ },
+            title = "Alert Title",
+            confirmText = "Confirm",
+            onConfirm = { /*confirm action*/ },
+            dismissText = "Cancel",
+            onDismiss = { /*close dialog*/ }
+        ) {
+            Text(
+                text = "are you share close the dialog?",
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
     }
 }

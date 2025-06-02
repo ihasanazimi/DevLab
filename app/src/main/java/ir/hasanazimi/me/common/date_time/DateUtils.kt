@@ -3,14 +3,6 @@ package ir.hasanazimi.me.common.date_time
 import android.content.Context
 import java.util.*
 
-/*
- * *
- *  * Created by Hasan Azimi on 1/8/22, 4:25 PM
- *  * Copyright (c) 2022 . All rights reserved.
- *  * Last modified 1/8/22, 4:25 PM
- *
- */
-
 object DateUtils {
 
     fun Date?.timeAgo(context: Context): String {
