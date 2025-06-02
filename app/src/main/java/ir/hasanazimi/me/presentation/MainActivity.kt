@@ -4,8 +4,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
-import ir.hasanazimi.me.common.base.BaseActivity
 import ir.hasanazimi.me.R
+import ir.hasanazimi.me.common.base.BaseActivity
 import ir.hasanazimi.me.common.extensions.addFragmentByAnimation
 import ir.hasanazimi.me.databinding.ActivityMainBinding
 import ir.hasanazimi.me.pagination.PaginationFragment

@@ -24,6 +24,19 @@ import javax.net.ssl.SSLSession
 object NetworkModule {
 
 
+    @Provides
+    @Singleton
+    @Named("regular")
+    fun provideRegularRetrofit(
+        okHttpClient: OkHttpClient,
+        gson: Gson,
+    ): Retrofit.Builder {
+        return Retrofit.Builder()
+            .baseUrl("https://sample.com/api/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+    }
+
     @Named("mock-retrofit")
     @Provides
     @Singleton
@@ -66,9 +79,9 @@ object NetworkModule {
         context: Context,
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
             .followSslRedirects(false)
             .addInterceptor(
                 ChuckerInterceptor.Builder(context)
@@ -79,5 +92,7 @@ object NetworkModule {
             .hostnameVerifier { hostname: String, session: SSLSession -> true }
             .build()
     }
+
+
 
 }

@@ -5,6 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import kotlin.math.*
+import androidx.core.graphics.toColorInt
 
 class SegmentChartView @JvmOverloads constructor(
     context: Context,
@@ -23,13 +24,13 @@ class SegmentChartView @JvmOverloads constructor(
 
     data class Segment(
         val value: Double,
-        val color: Int
+        val color: String
     )
 
     data class SegmentAngle(
         val startAngle: Float,
         val endAngle: Float,
-        val color: Int
+        val color: String
     )
 
     fun setSegments(newList: List<Segment>) {
@@ -39,20 +40,52 @@ class SegmentChartView @JvmOverloads constructor(
         invalidate()
     }
 
+
+    fun getSumOfSegmentsValue() = segments.sumOf { it.value }.toInt()
+
+
+    fun clearAllSegments(){
+        segments.clear()
+        computeAngles()
+        invalidate()
+    }
+
+
+    fun addNewSegment(newSegment : Segment){
+        segments.add(newSegment)
+        computeAngles()
+        invalidate()
+    }
+
+
+    private var minSweepDegrees = 5.0 // Minimum angle per segment
+
+    fun setMinSweepDegrees(min: Double) {
+        minSweepDegrees = min
+        computeAngles()
+        invalidate()
+    }
+
+
     private fun computeAngles() {
+        segmentAngles.clear()
         if (segments.isEmpty()) return
 
-        val totalValue = segments.sumByDouble { it.value }
-        if (totalValue == 0.0) return
-
         val totalSpacing = (segments.size - 1) * spacingDegrees
-        val totalAvailableDegrees = 180.0 - totalSpacing
+        val totalMinSweep = segments.size * minSweepDegrees
+        var remainingAvailable = 180.0 - totalSpacing - totalMinSweep
+
+        // Handle cases where remaining space is negative
+        if (remainingAvailable < 0) remainingAvailable = 0.0
+
+        val sumValues = segments.sumOf { it.value }
+        if (sumValues == 0.0) return
 
         var startAngle = 180.0
-        segmentAngles.clear()
 
-        segments.forEach { segment ->
-            val sweep = (segment.value / totalValue) * totalAvailableDegrees
+        segments.forEachIndexed { index, segment ->
+            val additionalSweep = (segment.value / sumValues) * remainingAvailable
+            val sweep = minSweepDegrees + additionalSweep
             val endAngle = startAngle + sweep
 
             segmentAngles.add(
@@ -63,7 +96,12 @@ class SegmentChartView @JvmOverloads constructor(
                 )
             )
 
-            startAngle = endAngle + spacingDegrees
+            // Add spacing only between segments
+            startAngle = if (index < segments.lastIndex) {
+                endAngle + spacingDegrees
+            } else {
+                endAngle
+            }
         }
     }
 
@@ -72,8 +110,8 @@ class SegmentChartView @JvmOverloads constructor(
         if (width == 0 || height == 0) return
 
         val centerX = width / 2f
-        val centerY = height.toFloat() // مرکز در پایین ویو
-        val radius = height.toFloat() // شعاع برابر ارتفاع
+        val centerY = height.toFloat()
+        val radius = height.toFloat()
 
         segmentAngles.forEach { angle ->
             drawWedgeSegment(canvas, centerX, centerY, radius, angle)
@@ -184,7 +222,7 @@ class SegmentChartView @JvmOverloads constructor(
 
         path.close()
 
-        paint.color = angle.color
+        paint.colorFilter = PorterDuffColorFilter(angle.color.toColorInt(), PorterDuff.Mode.SRC_IN)
         canvas.drawPath(path, paint)
     }
 

@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="black_transparency">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00ffffff</color>
-    <color name="backgroundColor">#fff</color>
+
+    <!-- Light Theme Colors -->
+    <color name="primary">#3F51B5</color> <!-- Indigo -->
+    <color name="primary_variant">#303F9F</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="secondary">#FF4081</color> <!-- Pink -->
+    <color name="secondary_variant">#C51162</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_background">#212121</color>
+    <color name="on_surface">#757575</color>
+    <color name="on_surface_variant">#B0B0B0</color>
+    <color name="error">#D32F2F</color>
+    <color name="on_error">#FFFFFF</color>
+
+    <!-- Dark Theme Colors (optional, override in values-night/colors.xml) -->
+    <color name="primary_dark">#7986CB</color>
+    <color name="primary_variant_dark">#5C6BC0</color>
+    <color name="on_primary_dark">#000000</color>
+    <color name="secondary_dark">#F06292</color>
+    <color name="secondary_variant_dark">#EC407A</color>
+    <color name="on_secondary_dark">#000000</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="on_background_dark">#E0E0E0</color>
+    <color name="on_surface_dark">#B0B0B0</color>
+    <color name="on_surface_variant_dark">#757575</color>
+    <color name="error_dark">#EF5350</color>
+    <color name="on_error_dark">#000000</color>
+
+
+
+    <color name="transparent">#00FFFFFF</color>
     <color name="snackBar_BackgroundColor">#202020</color>
-    <color name="blue">#4891e0</color>
-    <color name="blue_transparency">#372196F3</color>
     <color name="textColorNormality">#1D1D1D</color>
     <color name="textColorReverse">#EBEBEB</color>
 </resources>

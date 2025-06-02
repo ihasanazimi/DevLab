@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/transparent"
+    android:theme="@style/Base.Theme.Me"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
@@ -13,7 +14,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/backgroundColor"
+        app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="24dp"
         app:strokeWidth="0dp">
 
@@ -78,8 +79,8 @@
                     android:layout_marginEnd="@dimen/space_4"
                     android:layout_weight="1"
                     android:text="Cancel"
-                    android:textColor="@color/black"
-                    app:backgroundTint="@color/backgroundColor"
+                    android:textColor="@color/background_dark"
+                    app:backgroundTint="@color/background"
                     app:cornerRadius="@dimen/space_16"
                     app:strokeWidth="1dp" />
 
