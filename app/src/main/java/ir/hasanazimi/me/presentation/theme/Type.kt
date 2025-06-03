@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.sp
 import ir.hasanazimi.me.R
 
 val Yekan = FontFamily(
-    Font(R.font.yekan, FontWeight.Normal),
-    Font(R.font.yekan, FontWeight.Bold)
+    Font(R.font.yekan_regular, FontWeight.Normal),
+    Font(R.font.yekan_bold, FontWeight.Bold)
 )
 
 // Define custom typography based on Material Design 3
