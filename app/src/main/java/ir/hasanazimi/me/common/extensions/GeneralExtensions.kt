@@ -1,47 +1,20 @@
 package ir.hasanazimi.me.common.extensions
 
 import android.animation.Animator
-import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
-import android.text.Selection
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextPaint
-import android.text.TextWatcher
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.transition.Fade
-import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.ScrollView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.google.gson.Gson
-import ir.hasanazimi.me.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.regex.Pattern
@@ -49,221 +22,6 @@ import kotlin.reflect.KClass
 
 
 private const val TAG = "EXTENSIONS_TAG"
-
-private val viewScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
-
-
-fun Fragment.addFragmentByAnimation(
-    fragment: Fragment,
-    tag: String,
-    addToBackStack: Boolean,
-    customAnimations: Boolean,
-    containerViewId: Int,
-    commitAllowingStateLoss: Boolean = false
-) {
-
-    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-    if (customAnimations) {
-        fragmentTransaction.setCustomAnimations(
-            R.anim.enter_fragment_anim,
-            R.anim.exit_fragment_animation,
-            R.anim.pop_enter_fragment_animation,
-            R.anim.pop_exit_fragment_animation
-        )
-    }
-    if (addToBackStack) { fragmentTransaction.addToBackStack(tag) }
-    fragmentTransaction.add(containerViewId, fragment, tag)
-    if (commitAllowingStateLoss)  fragmentTransaction.commitAllowingStateLoss()
-    else fragmentTransaction.commit()
-}
-
-
-
-
-fun Fragment.replaceFragmentByAnimation(
-    fragment: Fragment,
-    tag: String,
-    addToBackStack: Boolean,
-    customAnimations: Boolean,
-    containerViewId: Int,
-    commitAllowingStateLoss: Boolean = false
-) {
-
-    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-    if (customAnimations) {
-        fragmentTransaction.setCustomAnimations(
-            R.anim.fade_in,
-            R.anim.fade_out,
-            R.anim.pop_enter,
-            R.anim.pop_exit
-        )
-    }
-    if (addToBackStack) { fragmentTransaction.addToBackStack(tag) }
-    fragmentTransaction.replace(containerViewId, fragment, tag)
-    if (commitAllowingStateLoss)  fragmentTransaction.commitAllowingStateLoss()
-    else fragmentTransaction.commit()
-}
-
-
-
-
-
-
-
-fun Fragment.onBackClick(callback: (onBackPressedCallback: OnBackPressedCallback) -> Unit) {
-    activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-        callback.invoke(this)
-    }
-}
-
-
-
-fun ImageView.setIconTint(colorID : Int){
-    this.setColorFilter(ContextCompat.getColor(this.context, colorID))
-}
-
-
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-    })
-}
-
-fun EditText.afterTextChangedEditable(afterTextChanged: (Editable?) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable)
-        }
-    })
-}
-
-
-
-fun EditText.doRequestFocus() {
-    requestFocus()
-    val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-}
-
-
-
-fun EditText.setEditTextJustReadOnly(value: Boolean, inputType: Int = InputType.TYPE_NULL) {
-    isFocusable = !value
-    isFocusableInTouchMode = !value
-    this.inputType = inputType
-}
-
-
-fun ViewGroup.showByAnimation() {
-    val transition = Fade()
-    transition.duration = 500
-    transition.addTarget(this)
-    TransitionManager.beginDelayedTransition(this, transition)
-    this.visibility = View.VISIBLE
-}
-
-
-
-fun View.setPaddingLeft(value: Int) {
-    setPadding(value, paddingTop, paddingRight, paddingBottom)
-}
-fun View.setPaddingTop(value: Int) {
-    setPadding(paddingLeft, value, paddingRight, paddingBottom)
-}
-fun View.setPaddingRight(value: Int) {
-    setPadding(paddingLeft, paddingTop, value, paddingBottom)
-}
-fun View.setPaddingBottom(value: Int) {
-    setPadding(paddingLeft, paddingTop, paddingRight, value)
-}
-
-
-
-
-fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
-    val spannableString = SpannableString(this.text)
-    var startIndexOfLink = -1
-    for (link in links) {
-        val clickableSpan = object : ClickableSpan() {
-            override fun updateDrawState(textPaint: TextPaint) {
-                // use this to change the link color
-                textPaint.color = textPaint.linkColor
-                // toggle below value to enable/disable
-                // the underline shown below the clickable text
-                textPaint.isUnderlineText = true
-            }
-
-            override fun onClick(view: View) {
-                Selection.setSelection((view as TextView).text as Spannable, 0)
-                view.invalidate()
-                link.second.onClick(view)
-            }
-        }
-        startIndexOfLink = this.text.toString().indexOf(link.first, startIndexOfLink + 1)
-        if(startIndexOfLink == -1) { continue }
-        spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    }
-    this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
-    this.setText(spannableString, TextView.BufferType.SPANNABLE)
-}
-
-
-
-
-fun View.singleClick(callback: () -> Unit) {
-    this.setOnClickListener {
-        viewScope.launch {
-            callback.invoke()
-            this@singleClick.isClickable = false
-            delay(300)
-            this@singleClick.isClickable = true
-            this.cancel()
-        }
-    }
-}
-
-
-
-
-fun View.show() { visibility = View.VISIBLE }
-fun View.hide() { visibility = View.GONE }
-fun View.invisible() { visibility = View.INVISIBLE }
-
-
-
-fun View.showByFadeIn() {
-    viewScope.launch {
-        if (this@showByFadeIn.isVisible.not()) {
-            animate().alpha(1f).setDuration(150L).withStartAction { show() }.start()
-            delay(150L)
-            this.cancel()
-        }
-    }
-}
-fun View.hideFadeOut() {
-    viewScope.launch {
-        if (this@hideFadeOut.isVisible) {
-            animate().alpha(0f).setDuration(150L).withEndAction { hide() }.start()
-            delay(150L)
-            this.cancel()
-        }
-    }
-}
-
-
-
-
-
 
 
 fun getApplicationVersion(context : Context) : Pair<String , Int>{
@@ -597,18 +355,6 @@ fun smoothScrollToThisView(scrollView: ScrollView,targetView : View){
     }.onFailure {
         Log.e(TAG, "smoothScrollToThisView: ${it.message}", )
     }
-}
-
-
-
-fun isMyServiceRunning(applicationContext: Context?, serviceClass: Class<*>): Boolean {
-    val manager = applicationContext?.getSystemService(Context.ACCOUNT_SERVICE) as ActivityManager?
-    for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
-        if (serviceClass.name == service.service.className) {
-            return true
-        }
-    }
-    return false
 }
 
 
