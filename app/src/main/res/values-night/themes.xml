@@ -22,7 +22,7 @@
         <item name="colorOnError">@color/on_error</item>
 
         <!-- Typography -->
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_regular</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.Me.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Me.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.Me.Headline3</item>
@@ -42,36 +42,43 @@
     </style>
 
     <!-- Typography styles -->
+    <!-- Typography styles -->
     <style name="TextAppearance.Me.Headline1" parent="TextAppearance.Material3.DisplayLarge">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_bold</item>
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/on_background</item>
     </style>
+
     <style name="TextAppearance.Me.Headline2" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_bold</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/on_background</item>
     </style>
+
     <style name="TextAppearance.Me.Headline3" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/on_background</item>
     </style>
+
     <style name="TextAppearance.Me.Body1" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/on_background</item>
     </style>
+
     <style name="TextAppearance.Me.Body2" parent="TextAppearance.Material3.BodyMedium">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/on_surface</item>
     </style>
+
     <style name="TextAppearance.Me.Caption" parent="TextAppearance.Material3.LabelSmall">
-        <item name="fontFamily">@font/yekan</item>
+        <item name="fontFamily">@font/yekan_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/on_surface_variant</item>
     </style>
+
 
     <!-- Shape styles -->
     <style name="ShapeAppearance.Me.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
@@ -89,7 +96,7 @@
 
     <!-- Component styles -->
     <style name="Widget.Me.Button" parent="Widget.Material3.Button">
-        <item name="android:fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="backgroundTint">@color/primary</item>
         <item name="android:textColor">@color/on_primary</item>
