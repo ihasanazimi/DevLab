@@ -1,0 +1,4 @@
+package ir.hasanazimi.me.data.repository.remote.remote_responses.x.mapper
+
+class XMapper {
+}
