@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "ir.hasanazimi.me"
+    namespace = "ir.hasanazimi.devlab"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ir.hasanazimi.me"
+        applicationId = "ir.hasanazimi.devlab"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
