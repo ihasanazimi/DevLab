@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ME"
+rootProject.name = "DebLab"
 include(":app")
  
