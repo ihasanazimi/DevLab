@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "ir.hasanazimi.me"
+    namespace = "ir.hasanazimi.devlab"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ir.hasanazimi.jetpackcompose.me"
+        applicationId = "ir.hasanazimi.jetpackcompose.devlab"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
