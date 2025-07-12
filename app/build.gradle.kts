@@ -4,17 +4,17 @@ plugins {
     id ("dagger.hilt.android.plugin")
     id ("kotlin-parcelize")
     id ("androidx.navigation.safeargs.kotlin")
-    id ("com.google.devtools.ksp")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "ir.hasanazimi.devlab"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ir.hasanazimi.devlab"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -97,7 +97,7 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     androidTestImplementation(libs.androidx.rules)
     implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
 
     // Glide ImageLoader
     implementation(libs.glide)
@@ -108,7 +108,7 @@ dependencies {
 
     // room dataBase
     implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     androidTestImplementation(libs.androidx.room.testing)
 
     // Nav Component
