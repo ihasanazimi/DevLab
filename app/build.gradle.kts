@@ -57,15 +57,6 @@ android {
         viewBinding = true
     }
 
-//    kapt {
-//        correctErrorTypes = true
-//    }
-
-//    /** for pdf generator */
-//    packagingOptions {
-//        exclude("META-INF/DEPENDENCIES")
-//    }
-
 }
 
 dependencies {
