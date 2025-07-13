@@ -1,40 +1,43 @@
 [versions]
+
 agp = "8.4.2"
-archComponentVersion = "2.7.0"
+kotlin = "1.9.22"
+kotlinGradlePlugin = "1.9.22"
+kotlinReflect = "1.9.22"
+kspVersion = "1.9.22-1.0.17"
+
+archComponentVersion = "2.9.1"
 biometric = "1.1.0"
 coreSplashscreen = "1.0.1"
-databindingRuntime = "8.5.1"
+databindingRuntime = "8.11.1"
 datastorePreferences = "1.1.1"
 glide = "4.16.0"
-gson = "2.10.1"
+gson = "2.13.1"
 hiltAndroid = "2.51"
-kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
-kotlinReflect = "1.9.20"
-kotlinxCoroutinesAndroid = "1.8.0"
+kotlinxCoroutinesAndroid = "1.8.1"
 legacySupportV4 = "1.0.0"
-chucker_libraryNoOp = "4.0.0"
+chucker_libraryNoOp = "4.1.0"
 lifecycleExtensions = "2.2.0"
 lottie = "5.2.0"
 material = "1.12.0"
 activity = "1.9.0"
-constraintlayout = "2.1.4"
-navigationVersion = "2.7.7"
-pagingVersion = "3.3.0"
+constraintlayout = "2.2.1"
+navigationVersion = "2.9.1"
+pagingVersion = "3.3.6"
 playServicesLocation = "21.3.0"
 retrofit = "2.9.0"
 roomVersion = "2.6.1"
 rules = "1.6.1"
-rxandroid = "3.0.0"
-rxjava = "3.1.5"
+rxandroid = "3.0.2"
+rxjava = "3.1.11"
 rxkotlin = "3.0.1"
-stetho = "1.5.1"
+stetho = "1.6.0"
 viewmodel = "1.1.1"
-kspVersion = "1.9.22-1.0.17"
 coreAnimation = "1.0.0"
 
 
@@ -46,6 +49,9 @@ jetbrains-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 
 
 [libraries]
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationVersion" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroid" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
