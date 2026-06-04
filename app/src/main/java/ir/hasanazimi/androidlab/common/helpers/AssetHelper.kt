@@ -20,9 +20,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.createBitmap
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -251,15 +249,6 @@ fun openBitmap(context: Context?, imageFileName: String?): Bitmap {
     return BitmapFactory.decodeStream(context!!.openFileInput(imageFileName))
 }
 
-
-
-@SuppressLint("UseKtx")
-suspend fun ComposeView.captureToBitmap(): Bitmap? {
-    val bitmap = createBitmap(width, height)
-    val canvas = Canvas(bitmap)
-    draw(canvas)
-    return bitmap
-}
 
 fun View.captureToBitmap(): Bitmap {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)

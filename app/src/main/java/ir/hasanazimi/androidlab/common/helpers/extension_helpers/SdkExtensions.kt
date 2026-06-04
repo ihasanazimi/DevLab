@@ -20,7 +20,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updateLayoutParams
-import ir.hasanazimi.android_compose_lab.R
+import ir.hasanazimi.androidlab.R
 
 
 @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N)
