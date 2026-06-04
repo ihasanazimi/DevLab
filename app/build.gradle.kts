@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "ir.hasanazimi.me"
+    namespace = "ir.hasanazimi.androidlab"
     compileSdk = 34
 
     defaultConfig {
