@@ -10,6 +10,7 @@ plugins {
 buildscript {
 
     repositories {
+        maven { url = uri("https://maven.myket.ir/") }
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")
