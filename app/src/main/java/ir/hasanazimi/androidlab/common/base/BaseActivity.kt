@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import ir.hasanazimi.androidlab.R
-import ir.hasanazimi.androidlab.common.more.ENGLISH_LANGUAGE_CODE
+import ir.hasanazimi.androidlab.common.more.PERSIAN_LANGUAGE_CODE
 import ir.hasanazimi.androidlab.common.more.SnackBarHelper
 import ir.hasanazimi.androidlab.common.more.localizedContext
 import java.util.Locale
@@ -55,7 +55,7 @@ abstract class BaseActivity<VB : ViewBinding>(
     override fun onStart() {
         super.onStart()
         Log.i(TAG, "onStart: ")
-        localizedContext(this, Locale(ENGLISH_LANGUAGE_CODE))
+        localizedContext(this, Locale(PERSIAN_LANGUAGE_CODE))
     }
 
     fun showErrorMessage(message: String) {

@@ -5,10 +5,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ir.hasanazimi.androidlab.R
+import ir.hasanazimi.androidlab.databinding.ActivityMainBinding
+import ir.hasanazimi.androidlab.presentation.features.fragments.x.XFragment
 import ir.hasanazimi.androidlab.common.base.BaseActivity
 import ir.hasanazimi.androidlab.common.extensions.addFragmentByAnimation
-import ir.hasanazimi.androidlab.databinding.ActivityMainBinding
-import ir.hasanazimi.androidlab.presentation.features.fragments.pagination.PaginationFragment
 
 
 @AndroidEntryPoint
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
 
-        addFragmentByAnimation(PaginationFragment(), PaginationFragment::class.java.simpleName,true,true,R.id.main)
+        addFragmentByAnimation(XFragment(), XFragment::class.java.simpleName,true,true,R.id.main)
 
     }
 

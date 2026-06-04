@@ -2,7 +2,6 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
-    alias(libs.plugins.jetbrains.ksp) apply false
 }
 
 
@@ -17,9 +16,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.51")
-        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.hilt.android.gradle.plugin)
+        classpath (libs.androidx.navigation.safe.args.gradle.plugin)
 //        classpath("com.google.gms:google-services:4.4.0")
     }
 

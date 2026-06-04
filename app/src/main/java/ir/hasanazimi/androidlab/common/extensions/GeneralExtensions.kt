@@ -303,7 +303,7 @@ fun getApplicationVersion(context : Context) : Pair<String , Int>{
     var versionCode = -1
     try {
         val pInfo: PackageInfo = context.packageManager.getPackageInfo(context.getPackageName(), 0)
-        versionName = pInfo.versionName
+        versionName = pInfo.versionName.toString()
         versionCode = pInfo.versionCode
     } catch (e: PackageManager.NameNotFoundException) { e.printStackTrace() }
     return Pair(versionName , versionCode)
