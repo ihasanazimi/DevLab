@@ -16,6 +16,6 @@ buildscript {
         classpath(libs.kotlin.gradle.plugin)
         classpath(libs.hilt.android.gradle.plugin)
         classpath (libs.androidx.navigation.safe.args.gradle.plugin)
-//        classpath("com.google.gms:google-services:4.4.0")
+        /*classpath("com.google.gms:google-services:4.4.0")*/
     }
 }

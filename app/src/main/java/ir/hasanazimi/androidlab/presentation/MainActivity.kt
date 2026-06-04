@@ -6,7 +6,6 @@ import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ir.hasanazimi.androidlab.R
 import ir.hasanazimi.androidlab.databinding.ActivityMainBinding
-import ir.hasanazimi.androidlab.presentation.features.fragments.x.XFragment
 import ir.hasanazimi.androidlab.common.base.BaseActivity
 
 
