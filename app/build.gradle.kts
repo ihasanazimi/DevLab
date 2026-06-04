@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -7,9 +8,11 @@ plugins {
     id("kotlin-kapt")
 }
 
+
+
 android {
     namespace = "ir.hasanazimi.androidlab"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "ir.hasanazimi.androidlab"

@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import ir.hasanazimi.androidlab.R
-import ir.hasanazimi.androidlab.common.more.PERSIAN_LANGUAGE_CODE
-import ir.hasanazimi.androidlab.common.more.SnackBarHelper
-import ir.hasanazimi.androidlab.common.more.localizedContext
+import ir.hasanazimi.androidlab.common.helpers.PERSIAN_LANGUAGE_CODE
+import ir.hasanazimi.androidlab.common.helpers.SnackBarHelper
+import ir.hasanazimi.androidlab.common.helpers.localizedContext
 import java.util.Locale
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -20,6 +20,8 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     private lateinit var _binding: VB
     protected val binding: VB get() = _binding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate: ")

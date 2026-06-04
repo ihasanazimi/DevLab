@@ -6,19 +6,16 @@ plugins {
 
 
 buildscript {
-
     repositories {
         maven { url = uri("https://maven.myket.ir/") }
         google()
         mavenCentral()
         maven(url = "https://jitpack.io")
     }
-
     dependencies {
         classpath(libs.kotlin.gradle.plugin)
         classpath(libs.hilt.android.gradle.plugin)
         classpath (libs.androidx.navigation.safe.args.gradle.plugin)
 //        classpath("com.google.gms:google-services:4.4.0")
     }
-
 }

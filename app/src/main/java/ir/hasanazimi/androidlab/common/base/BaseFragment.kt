@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import ir.hasanazimi.androidlab.R
+import ir.hasanazimi.androidlab.common.helpers.SnackBarHelper
 import ir.hasanazimi.androidlab.presentation.MainActivity
-import ir.hasanazimi.androidlab.common.extensions.hideKeyboard
-import ir.hasanazimi.androidlab.common.more.SnackBarHelper
+
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -33,7 +33,6 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated: ")
-        hideKeyboard(view)
         initializing()
         uiConfig()
         listeners()

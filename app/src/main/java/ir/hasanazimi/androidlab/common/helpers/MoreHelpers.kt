@@ -22,8 +22,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.net.toUri
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import ir.hasanazimi.android_compose_lab.common.helpers.extension_helpers.isAppAvailable
-import ir.hasanazimi.android_compose_lab.common.helpers.extension_helpers.showToast
+import ir.hasanazimi.androidlab.common.helpers.extension_helpers.isAppAvailable
+import ir.hasanazimi.androidlab.common.helpers.extension_helpers.showToast
+import java.util.Locale
 
 /**
  * Util class for converting between dp, px and other magical pixel units
@@ -374,4 +375,29 @@ class LocationHelper(private val context: Context) {
                 onFailure.invoke(e)
             }
     }
+}
+
+
+
+
+
+
+
+
+
+
+const val PERSIAN_LANGUAGE_CODE = "fa"
+const val PERSIAN_COUNTRY_CODE = "IR"
+const val ENGLISH_LANGUAGE_CODE = "en"
+const val ENGLISH_COUNTRY_CODE = "US"
+const val LOCALE_INIT = "locale_init"
+const val BUBBLE_CARD_GUID = "card_guid_bubble"
+const val SHOW_CARD_GUID_LAYOUT = "show_guid_card_layout"
+
+fun localizedContext(baseContext: Context, locale: Locale = Locale(ENGLISH_LANGUAGE_CODE)): Context {
+    Locale.setDefault(locale)
+    val configuration = baseContext.resources.configuration
+    configuration.setLocale(locale)
+    configuration.setLayoutDirection(locale)
+    return baseContext.createConfigurationContext(configuration)
 }

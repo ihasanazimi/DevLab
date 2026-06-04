@@ -10,7 +10,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
-import ir.hasanazimi.androidlab.common.file.FontHelper
+import ir.hasanazimi.androidlab.common.helpers.FontHelper
 
 class CircleProgress @JvmOverloads constructor(
     context: Context,
