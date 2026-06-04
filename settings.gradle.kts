@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         maven { url = uri("https://maven.myket.ir/") }
@@ -12,6 +13,9 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
