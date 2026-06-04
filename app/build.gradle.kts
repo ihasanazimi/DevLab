@@ -12,7 +12,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ir.hasanazimi.me"
+        applicationId = "ir.hasanazimi.androidlab"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
