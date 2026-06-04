@@ -108,7 +108,7 @@ fun Fragment.addFragmentByAnimation(
 
 
 
-fun AppCompatActivity.replaceFragmentByAnimation(
+fun Fragment.replaceFragmentByAnimation(
     fragment: Fragment,
     tag: String,
     addToBackStack: Boolean,
@@ -117,7 +117,7 @@ fun AppCompatActivity.replaceFragmentByAnimation(
     commitAllowingStateLoss: Boolean = false
 ) {
 
-    val fragmentTransaction = supportFragmentManager.beginTransaction()
+    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
     if (customAnimations) {
         fragmentTransaction.setCustomAnimations(
             R.anim.fade_in,

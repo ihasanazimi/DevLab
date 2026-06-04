@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
-import ir.hasanazimi.androidlab.common.extensions.hideKeyboard
 
 abstract class BaseDialog<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -38,7 +37,6 @@ abstract class BaseDialog<VB : ViewBinding>(
 
 
     open fun initializing(){
-        hideKeyboard(view)
         Log.i(TAG, "initializing: ")
     }
 

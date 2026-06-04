@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import ir.hasanazimi.androidlab.common.extensions.hideKeyboard
+//import com.google.android.material.bottomsheet.BottomSheetDialog
 
 abstract class BaseBottomSheet<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -36,7 +35,7 @@ abstract class BaseBottomSheet<VB : ViewBinding>(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Log.d(TAG, "onCreateDialog: ")
         val bottomSheet = super.onCreateDialog(savedInstanceState)
-        bottomSheet.setOnShowListener {
+        /*bottomSheet.setOnShowListener {
             val frameLayout: FrameLayout? = bottomSheet.findViewById(com.google.android.material.R.id.design_bottom_sheet)
             if (frameLayout != null) {
 
@@ -65,7 +64,7 @@ abstract class BaseBottomSheet<VB : ViewBinding>(
                     }
                 })
             }
-        }
+        }*/
         return bottomSheet
 
     }
@@ -80,7 +79,6 @@ abstract class BaseBottomSheet<VB : ViewBinding>(
 
 
     open fun initializing(){
-        hideKeyboard(view)
         Log.i(TAG, "initializing: ")
     }
 

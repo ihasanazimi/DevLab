@@ -1,4 +1,4 @@
-package ir.hasanazimi.androidlab.common.more
+package ir.hasanazimi.androidlab.common.helpers
 
 import android.annotation.SuppressLint
 import android.app.Activity
