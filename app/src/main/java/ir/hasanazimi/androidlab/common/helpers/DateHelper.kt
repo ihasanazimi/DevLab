@@ -1,4 +1,4 @@
-package ir.hasanazimi.androidlab.common.helpers
+package ir.hasanazimi.android_compose_lab.common.helpers
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -15,149 +15,85 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.roundToLong
 
 object DateHelper {
-    const val PERSIAN_EPOCH = 1948321
+
     val persianMonthNames = arrayOf(
-        "\u0641\u0631\u0648\u0631\u062f\u06cc\u0646",
-        "\u0627\u0631\u062f\u06cc\u0628\u0647\u0634\u062a",
-        "\u062e\u0631\u062f\u0627\u062f",
-        "\u062a\u06cc\u0631",
-        "\u0645\u0631\u062f\u0627\u062f",
-        "\u0634\u0647\u0631\u06cc\u0648\u0631",
-        "\u0645\u0647\u0631",
-        "\u0622\u0628\u0627\u0646",
-        "\u0622\u0630\u0631",
-        "\u062f\u06cc",
-        "\u0628\u0647\u0645\u0646",
-        "\u0627\u0633\u0641\u0646\u062f"
+        "\u0641\u0631\u0648\u0631\u062f\u06cc\u0646", // فروردین
+        "\u0627\u0631\u062f\u06cc\u0628\u0647\u0634\u062a", // اردیبهشت
+        "\u062e\u0631\u062f\u0627\u062f", // خرداد
+        "\u062a\u06cc\u0631", // تیر
+        "\u0645\u0631\u062f\u0627\u062f", // مرداد
+        "\u0634\u0647\u0631\u06cc\u0648\u0631", // شهریور
+        "\u0645\u0647\u0631", // مهر
+        "\u0622\u0628\u0627\u0646", // آبان
+        "\u0622\u0630\u0631", // آذر
+        "\u062f\u06cc", // دی
+        "\u0628\u0647\u0645\u0646", // بهمن
+        "\u0627\u0633\u0641\u0646\u062f" // اسفند
     )
+
     val persianWeekDays = arrayOf(
-        "\u0634\u0646\u0628\u0647",
-        "\u06cc\u06a9\u200c\u0634\u0646\u0628\u0647",
-        "\u062f\u0648\u0634\u0646\u0628\u0647",
-        "\u0633\u0647\u200c\u0634\u0646\u0628\u0647",
-        "\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647",
-        "\u067e\u0646\u062c\u200c\u0634\u0646\u0628\u0647",
-        "\u062c\u0645\u0639\u0647"
+        "\u0634\u0646\u0628\u0647", // شنبه
+        "\u06cc\u06a9\u200c\u0634\u0646\u0628\u0647", // یک‌شنبه
+        "\u062f\u0648\u0634\u0646\u0628\u0647", // دوشنبه
+        "\u0633\u0647\u200c\u0634\u0646\u0628\u0647", // سه‌شنبه
+        "\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647", // چهارشنبه
+        "\u067e\u0646\u062c\u200c\u0634\u0646\u0628\u0647", // پنج‌شنبه
+        "\u062c\u0645\u0639\u0647" // جمعه
     )
 
     /**
-     * Checks if Persian year is leap year.
-     * Input: Persian year (int). Output: Boolean.
+     * بررسی سال کبیسه در تقویم جلالی با دقت بالای ریاضی
      */
     fun isPersianLeapYear(persianYear: Int): Boolean {
-        return ceil(38.0 + (ceil((persianYear - 474.0).toDouble(), 2820.0) + 474.0) * 682.0, 2816.0) < 682.0
-    }
-
-    /**
-     * Converts Persian date to Julian day number.
-     * Input: Persian year, month, day. Output: Julian day (Long).
-     */
-    fun persianToJulian(year: Long, month: Int, day: Int): Long {
-        return (365L * (ceil((year - 474.0).toDouble(), 2820.0) + 474.0 - 1L) +
-                (floor(682L * (ceil((year - 474.0).toDouble(), 2820.0) + 474.0 - 110.0) / 2816.0).toLong()) +
-                (PERSIAN_EPOCH - 1L) +
-                (1029983L * floor((year - 474.0) / 2820.0).toLong()) +
-                (if (month < 7) 31 * month else 30 * month + 6) +
-                day).roundToLong()
+        return ceil(38.0 + (ceil((persianYear - 474.0), 2820.0) + 474.0) * 682.0, 2816.0) < 682.0
     }
 
     private fun ceil(double1: Double, double2: Double): Long {
-        return (double1 - double2 * floor(double1 / double2)).toLong()
+        return (double1 - double2 * kotlin.math.floor(double1 / double2)).toLong()
     }
 
-    /**
-     * Formats time difference into human-readable string.
-     * Input: ISO date string. Output: "X ago" string.
-     */
     fun getTimeAgo(inputDateString: String, shouldBeEnglish: Boolean): String {
         val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH)
-        val inputDate = dateFormat.parse(inputDateString)
+        val inputDate = try { dateFormat.parse(inputDateString) } catch (e: Exception) { null }
         if (inputDate == null) return if (shouldBeEnglish) "Unknown Date" else "تاریخ نامشخص"
 
         val now = Calendar.getInstance()
         val inputCalendar = Calendar.getInstance().apply { time = inputDate }
         val diffInMillis = now.timeInMillis - inputCalendar.timeInMillis
 
-        val seconds = diffInMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
+        return getTimeAgoFromDiff(diffInMillis, shouldBeEnglish)
+    }
+
+    fun getTimeAgo(timestampMillis: Long, shouldBeEnglish: Boolean = false): String {
+        val now = System.currentTimeMillis()
+        val diff = now - timestampMillis
+        return getTimeAgoFromDiff(diff, shouldBeEnglish)
+    }
+
+    private fun getTimeAgoFromDiff(diffInMillis: Long, shouldBeEnglish: Boolean): String {
+        if (diffInMillis < 0) return if (shouldBeEnglish) "Just now" else "همین الان"
+
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillis)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis)
+        val hours = TimeUnit.MILLISECONDS.toHours(diffInMillis)
+        val days = TimeUnit.MILLISECONDS.toDays(diffInMillis)
         val weeks = days / 7
         val months = days / 30
         val years = days / 365
 
         return when {
-            years > 0 -> when (years) {
-                1L -> if (shouldBeEnglish) "A year ago" else "یک سال پیش"
-                2L -> if (shouldBeEnglish) "2 years ago" else "دو سال پیش"
-                else -> if (shouldBeEnglish) "$years years ago" else "$years سال پیش"
-            }
-            months > 0 -> when (months) {
-                1L -> if (shouldBeEnglish) "A month ago" else "یک ماه پیش"
-                2L -> if (shouldBeEnglish) "2 months ago" else "دو ماه پیش"
-                else -> if (shouldBeEnglish) "$months months ago" else "$months ماه پیش"
-            }
-            weeks > 0 -> when (weeks) {
-                1L -> if (shouldBeEnglish) "A week ago" else "یک هفته پیش"
-                2L -> if (shouldBeEnglish) "2 weeks ago" else "دو هفته پیش"
-                else -> if (shouldBeEnglish) "$weeks weeks ago" else "$weeks هفته پیش"
-            }
-            days > 0 -> when (days) {
-                1L -> if (shouldBeEnglish) "Yesterday" else "دیروز"
-                2L -> if (shouldBeEnglish) "2 days ago" else "دو روز پیش"
-                else -> if (shouldBeEnglish) "$days days ago" else "$days روز پیش"
-            }
-            hours > 0 -> when (hours) {
-                1L -> if (shouldBeEnglish) "An hour ago" else "یک ساعت پیش"
-                2L -> if (shouldBeEnglish) "2 hours ago" else "دو ساعت پیش"
-                else -> if (shouldBeEnglish) "$hours hours ago" else "$hours ساعت پیش"
-            }
-            minutes > 0 -> when (minutes) {
-                1L -> if (shouldBeEnglish) "A minute ago" else "یک دقیقه پیش"
-                2L -> if (shouldBeEnglish) "2 minutes ago" else "دو دقیقه پیش"
-                else -> if (shouldBeEnglish) "$minutes minutes ago" else "$minutes دقیقه پیش"
-            }
+            years > 0 -> if (shouldBeEnglish) { if (years == 1L) "A year ago" else "$years years ago" } else { if (years == 1L) "یک سال پیش" else "$years سال پیش" }
+            months > 0 -> if (shouldBeEnglish) { if (months == 1L) "A month ago" else "$months months ago" } else { if (months == 1L) "یک ماه پیش" else "$months ماه پیش" }
+            weeks > 0 -> if (shouldBeEnglish) { if (weeks == 1L) "A week ago" else "$weeks weeks ago" } else { if (weeks == 1L) "یک هفته پیش" else "$weeks هفته پیش" }
+            days > 0 -> if (shouldBeEnglish) { if (days == 1L) "A day ago" else "$days days ago" } else { if (days == 1L) "یک روز پیش" else "$days روز پیش" }
+            hours > 0 -> if (shouldBeEnglish) { if (hours == 1L) "An hour ago" else "$hours hours ago" } else { if (hours == 1L) "یک ساعت پیش" else "$hours ساعت پیش" }
+            minutes > 0 -> if (shouldBeEnglish) { if (minutes == 1L) "A min ago" else "$minutes min ago" } else { if (minutes == 1L) "یک دقیقه پیش" else "$minutes دقیقه پیش" }
             seconds > 10 -> if (shouldBeEnglish) "$seconds seconds ago" else "$seconds ثانیه پیش"
             else -> if (shouldBeEnglish) "Moments ago" else "لحظاتی پیش"
         }
     }
-
-    /**
-     * Formats time difference from timestamp.
-     * Input: Timestamp (Long). Output: "X ago" string.
-     */
-    fun getTimeAgo(timestampMillis: Long, shouldBeEnglish: Boolean = false): String {
-        val now = System.currentTimeMillis()
-        val diff = now - timestampMillis
-        if (diff < 0) return if (shouldBeEnglish) "Just now" else "همین الان"
-
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(diff)
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(diff)
-        val hours = TimeUnit.MILLISECONDS.toHours(diff)
-        val days = TimeUnit.MILLISECONDS.toDays(diff)
-        val weeks = days / 7
-
-        return when {
-            seconds < 60 -> if (shouldBeEnglish) "now" else "لحظاتی پیش"
-            minutes == 1L -> if (shouldBeEnglish) "A min ago" else "یک دقیقه پیش"
-            minutes < 60 -> if (shouldBeEnglish) "$minutes min ago" else "$minutes دقیقه پیش"
-            hours == 1L -> if (shouldBeEnglish) "An hour ago" else "یک ساعت پیش"
-            hours < 24 -> if (shouldBeEnglish) "$hours hours ago" else "$hours ساعت پیش"
-            days == 1L -> if (shouldBeEnglish) "A day ago" else "یک روز پیش"
-            days == 2L -> if (shouldBeEnglish) "2 days ago" else "دو روز پیش"
-            days < 7 -> if (shouldBeEnglish) "$days days ago" else "$days روز پیش"
-            weeks == 1L -> if (shouldBeEnglish) "A week ago" else "یک هفته پیش"
-            weeks == 2L -> if (shouldBeEnglish) "2 weeks ago" else "دو هفته پیش"
-            else -> if (shouldBeEnglish) "$weeks weeks ago" else "$weeks هفته پیش"
-        }
-    }
-
-
-
 
     fun getFormattedDateTehran(timeMs: Long): String {
         return try {
@@ -169,10 +105,6 @@ object DateHelper {
         }
     }
 
-    /**
-     * Gets Persian month name from Gregorian month number.
-     * Input: Gregorian month (1-12). Output: Persian month name.
-     */
     fun getGregorianMonthNameInPersian(monthNumber: Int, shouldBeEnglish: Boolean = false): String {
         return when (monthNumber) {
             1 -> if (shouldBeEnglish) "January" else "ژانویه"
@@ -191,57 +123,51 @@ object DateHelper {
         }
     }
 
+    /**
+     * کلاس یکپارچه‌شده تقویم شمسی که از RoozhDateConverter برای محاسبات استفاده می‌کند
+     */
     class PersianCalendar : GregorianCalendar {
         var persianYear: Int = 0
-        var persianMonth: Int = 0
+        var persianMonth: Int = 0 // 0-indexed (فروردین = 0)
         var persianDay: Int = 0
         var delimiter: String = "/"
 
-        constructor() : super(TimeZone.getTimeZone("GMT")) {
+        constructor() : super(TimeZone.getTimeZone("Asia/Tehran")) {
             calculatePersianDate()
         }
 
-        constructor(millis: Long) : super(TimeZone.getTimeZone("GMT")) {
+        constructor(millis: Long) : super(TimeZone.getTimeZone("Asia/Tehran")) {
             timeInMillis = millis
             calculatePersianDate()
         }
 
         private fun calculatePersianDate() {
-            val julianDate = (timeInMillis - PERSIAN_EPOCH * 86400000L) / 86400000L
-            val persianDate = julianToPersian(julianDate)
-            persianYear = (persianDate shr 16).toInt()
-            persianMonth = ((persianDate and 0xff00L).toInt() shr 8) - 1
-            persianDay = (persianDate and 0xffL).toInt()
-        }
+            val converter = RoozhDateConverter()
+            val cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tehran"))
+            cal.timeInMillis = this.timeInMillis
 
-        private fun julianToPersian(julianDate: Long): Long {
-            val persianEpochInJulian = julianDate - persianToJulian(475L, 0, 1)
-            val cyear = ceil(persianEpochInJulian.toDouble(), 1029983.0).toLong()
-            val ycycle = if (cyear != 1029982L) {
-                floor((2816.0 * cyear.toDouble() + 1031337.0) / 1028522.0).toLong()
-            } else {
-                2820L
-            }
-            val year = 474L + 2820L * floor(persianEpochInJulian / 1029983.0).toLong() + ycycle
-            val aux = (1L + julianDate) - persianToJulian(year, 0, 1)
-            val month = if (aux > 186L) {
-                (ceil((aux - 6L).toDouble() / 30.0) - 1).toInt()
-            } else {
-                (ceil(aux.toDouble() / 31.0) - 1).toInt()
-            }
-            val day = (julianDate - (persianToJulian(year, month, 1) - 1L)).toInt()
-            return (year shl 16) or (month shl 8).toLong() or day.toLong()
+            converter.gregorianToPersian(
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1, // Calendar.MONTH از صفر شروع می‌شود
+                cal.get(Calendar.DAY_OF_MONTH)
+            )
+
+            persianYear = converter.year
+            persianMonth = converter.month - 1
+            persianDay = converter.day
         }
 
         fun setPersianDate(persianYear: Int, persianMonth: Int, persianDay: Int) {
             this.persianYear = persianYear
             this.persianMonth = persianMonth
             this.persianDay = persianDay
-            timeInMillis = convertToMilis(persianToJulian(persianYear.toLong(), persianMonth - 1, persianDay))
-        }
 
-        private fun convertToMilis(julianDate: Long): Long {
-            return PERSIAN_EPOCH * 86400000L + julianDate * 86400000L
+            val converter = RoozhDateConverter()
+            converter.persianToGregorian(persianYear, persianMonth + 1, persianDay)
+
+            val cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tehran"))
+            cal.set(converter.year, converter.month - 1, converter.day, 0, 0, 0)
+            this.timeInMillis = cal.timeInMillis
         }
 
         fun parse(dateString: String?) {
@@ -249,18 +175,18 @@ object DateHelper {
             if (tokens?.size != 3) throw RuntimeException("wrong date: $dateString is not a Persian Date")
             setPersianDate(
                 tokens[0].toInt(),
-                tokens[1].toInt(),
+                tokens[1].toInt() - 1,
                 tokens[2].toInt()
             )
         }
 
         val isPersianLeapYear: Boolean
-            get() = isPersianLeapYear(persianYear)
+            get() = DateHelper.isPersianLeapYear(persianYear)
 
-        val persianMonthName: String?
-            get() = persianMonthNames[persianMonth]
+        val persianMonthName: String
+            get() = persianMonthNames.getOrElse(persianMonth) { "" }
 
-        val persianWeekDayName: String?
+        val persianWeekDayName: String
             get() = when (get(DAY_OF_WEEK)) {
                 SATURDAY -> persianWeekDays[0]
                 SUNDAY -> persianWeekDays[1]
@@ -275,80 +201,70 @@ object DateHelper {
             get() = "$persianWeekDayName  $persianDay  $persianMonthName  $persianYear"
 
         val persianShortDate: String
-            get() = "${formatToMilitary(persianYear)}/$delimiter${formatToMilitary(persianMonth + 1)}/$delimiter${formatToMilitary(persianDay)}"
-
-        private fun formatToMilitary(i: Int): String {
-            return if (i < 10) "0$i" else i.toString()
-        }
+            get() = String.format(Locale.US, "%04d%s%02d%s%02d", persianYear, delimiter, persianMonth + 1, delimiter, persianDay)
     }
 
     /**
-     * Gets current Persian date.
-     * Input: None. Output: Persian date string (YYYY/MM/DD).
+     * اکنون به درستی فرمت yyyy/MM/dd را برمی‌گرداند.
      */
     fun getCurrentPersianDate(): String {
         val persianCalendar = PersianCalendar()
-        return "${persianCalendar.persianYear}/${persianCalendar.persianMonth + 1}/${persianCalendar.persianDay}"
+        return persianCalendar.persianShortDate
     }
 
-    /**
-     * Gets current time in Tehran (ISO format).
-     * Input: None. Output: Time string (HH:mm:ss).
-     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCurrentTimeInTehran1(): String {
         val currentTime = LocalTime.now(ZoneId.of("Asia/Tehran"))
-        val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        val formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
         return currentTime.format(formatter)
     }
 
-    /**
-     * Gets current time in Tehran (using Calendar).
-     * Input: None. Output: Time string (HH:mm:ss).
-     */
     fun getCurrentTimeInTehran2(): String {
         val currentTime = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tehran")).time
-        val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val formatter = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
         return formatter.format(currentTime)
     }
 
-    /**
-     * Calculates time difference between two times.
-     * Input: Two time strings (HH:mm:ss). Output: Difference (HH:mm:ss).
-     */
     fun timeDifference(time1: String, time2: String): String {
-        if (time1.isNotEmpty() && time2.isNotEmpty()) {
-            val (hours1, minutes1, seconds1) = time1.split(":").map { it.toInt() }
-            val (hours2, minutes2, seconds2) = time2.split(":").map { it.toInt() }
-            val totalSeconds1 = hours1 * 3600 + minutes1 * 60 + seconds1
-            val totalSeconds2 = hours2 * 3600 + minutes2 * 60 + seconds2
-            var differenceSeconds = Math.abs(totalSeconds1 - totalSeconds2)
-            val differenceHours = differenceSeconds / 3600
-            differenceSeconds %= 3600
-            val differenceMinutes = differenceSeconds / 60
-            differenceSeconds %= 60
-            return String.format("%02d:%02d:%02d", differenceHours, differenceMinutes, differenceSeconds)
-        } else {
-            return ""
+        try {
+            if (time1.isNotEmpty() && time2.isNotEmpty()) {
+                val p1 = time1.split(":").map { it.toIntOrNull() ?: 0 }
+                val p2 = time2.split(":").map { it.toIntOrNull() ?: 0 }
+
+                val h1 = p1.getOrElse(0) { 0 }
+                val m1 = p1.getOrElse(1) { 0 }
+                val s1 = p1.getOrElse(2) { 0 }
+
+                val h2 = p2.getOrElse(0) { 0 }
+                val m2 = p2.getOrElse(1) { 0 }
+                val s2 = p2.getOrElse(2) { 0 }
+
+                val totalSeconds1 = h1 * 3600 + m1 * 60 + s1
+                val totalSeconds2 = h2 * 3600 + m2 * 60 + s2
+                var differenceSeconds = Math.abs(totalSeconds1 - totalSeconds2)
+
+                val differenceHours = differenceSeconds / 3600
+                differenceSeconds %= 3600
+                val differenceMinutes = differenceSeconds / 60
+                differenceSeconds %= 60
+
+                return String.format(Locale.US, "%02d:%02d:%02d", differenceHours, differenceMinutes, differenceSeconds)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+        return ""
     }
 
-    /**
-     * Gets current time in 24-hour format.
-     * Input: None. Output: Time string (HH:mm).
-     */
     fun getCurrentTimeIn24HourFormat(): String {
-        val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Tehran")
         return dateFormat.format(Date())
     }
 
-    /**
-     * Converts time string to Date object.
-     * Input: Time string (HH:mm). Output: Date or null.
-     */
     fun toDateTimeOrNull(timeString: String): Date? {
         return try {
-            val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+            val sdf = SimpleDateFormat("HH:mm", Locale.ENGLISH)
             sdf.isLenient = false
             sdf.parse(timeString)
         } catch (e: Exception) {
@@ -356,76 +272,42 @@ object DateHelper {
         }
     }
 
-    /**
-     * Converts time string to LocalTime object.
-     * Input: Time string (HH:mm). Output: LocalTime or null.
-     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun toLocalTimeOrNull(timeString: String): LocalTime? {
         return try {
-            LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"))
+            LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH))
         } catch (e: DateTimeParseException) {
             null
         }
     }
 
-    /**
-     * Converts seconds to milliseconds.
-     * Input: Seconds (Long). Output: Milliseconds (Long).
-     */
-    fun convertSecondToMilliSecond(time: Long): Long {
-        return time * 1000L
-    }
+    fun convertSecondToMilliSecond(time: Long): Long = time * 1000L
 
-    /**
-     * Converts milliseconds to seconds.
-     * Input: Milliseconds (Long). Output: Seconds (Long).
-     */
-    fun convertSystemTimeMSToSecond(millisecond: Long): Long {
-        return millisecond / 1000L
-    }
+    fun convertSystemTimeMSToSecond(millisecond: Long): Long = millisecond / 1000L
 
-    /**
-     * Converts milliseconds to minutes:seconds format.
-     * Input: Milliseconds (Long). Output: "MM:SS" string.
-     */
-    fun convertSystemTimeMSToMinute(millisecond: Long): String? {
+    fun convertSystemTimeMSToMinute(millisecond: Long): String {
         val second = (millisecond / 1000) % 60
-        val minute = (millisecond / (1000 * 60)) % 60
+        val minute = (millisecond / 60000) // اصلاح باگ صفر شدن دقیقه بعد از یک ساعت
         return String.format(Locale.US, "%02d:%02d", minute, second)
     }
 
-    /**
-     * Formats hour and minute into "HH:MM" string.
-     * Input: Hour and minute strings. Output: Formatted time string.
-     */
     fun getTimeFormat(hour: String, minute: String): String {
-        return String.format(Locale.getDefault(), "%02d:%02d", hour.toInt(), minute.toInt())
+        return String.format(Locale.US, "%02d:%02d", hour.toIntOrNull() ?: 0, minute.toIntOrNull() ?: 0)
     }
 }
 
 /**
- * Converts between Gregorian and Jalali (Persian) dates.
- * Uses Borkowski's algorithm for accurate conversions.
+ * تبدیل تاریخ میلادی و شمسی با استفاده از الگوریتم Borkowski
  */
 class RoozhDateConverter {
-    private val mounths = arrayOf<String?>(
-        "فروردین",
-        "اردیبهشت",
-        "خرداد",
-        "تیر",
-        "مرداد",
-        "شهریور",
-        "مهر",
-        "آبان",
-        "آذر",
-        "دی",
-        "بهمن",
-        "اسفند"
+    private val mounths = arrayOf(
+        "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+        "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
     )
     var day: Int = 0
     var month: Int = 0
     var year: Int = 0
+
     private var jY = 0
     private var jM = 0
     private var jD = 0
@@ -446,8 +328,7 @@ class RoozhDateConverter {
 
     private fun jD2JG(JD: Int, J1G0: Int) {
         val i: Int
-        var j: Int
-        j = 4 * JD + 139361631
+        var j = 4 * JD + 139361631
         if (J1G0 == 0) {
             j = j + (4 * JD + 183187720) / 146097 * 3 / 4 * 4 - 3908
         }
@@ -469,12 +350,12 @@ class RoozhDateConverter {
                 jD = (k % 31) + 1
                 return
             } else {
-                k = k - 186
+                k -= 186
             }
         } else {
-            jY = jY - 1
-            k = k + 179
-            if (leap == 1) k = k + 1
+            jY -= 1
+            k += 179
+            if (leap == 1) k += 1
         }
         jM = 7 + k / 30
         jD = (k % 30) + 1
@@ -482,9 +363,7 @@ class RoozhDateConverter {
 
     private fun jal2JD(jY: Int, jM: Int, jD: Int): Int {
         jalCal(jY)
-        val jd = (jG2JD(gY, 3, march, 1) + (jM - 1) * 31 - jM / 7 * (jM - 7)
-                + jD - 1)
-        return jd
+        return (jG2JD(gY, 3, march, 1) + (jM - 1) * 31 - jM / 7 * (jM - 7) + jD - 1)
     }
 
     private fun jalCal(jY: Int) {
@@ -503,8 +382,8 @@ class RoozhDateConverter {
             jump = jm - jp
             if (jY < jm) {
                 var N = jY - jp
-                leapJ = leapJ + N / 33 * 8 + (N % 33 + 3) / 4
-                if ((jump % 33) == 4 && (jump - N) == 4) leapJ = leapJ + 1
+                leapJ += N / 33 * 8 + (N % 33 + 3) / 4
+                if ((jump % 33) == 4 && (jump - N) == 4) leapJ += 1
                 val leapG = (gY / 4) - (gY / 100 + 1) * 3 / 4 - 150
                 march = 20 + leapJ - leapG
                 if ((jump - N) < 6) N = N - jump + (jump + 4) / 33 * 33
@@ -512,29 +391,24 @@ class RoozhDateConverter {
                 if (leap == -1) leap = 4
                 break
             }
-            leapJ = leapJ + jump / 33 * 8 + (jump % 33) / 4
+            leapJ += jump / 33 * 8 + (jump % 33) / 4
             jp = jm
         }
     }
 
     override fun toString(): String {
-        return String.format("%04d-%02d-%02d", this.year, this.month, this.day)
+        return String.format(Locale.US, "%04d-%02d-%02d", this.year, this.month, this.day)
     }
 
     @SuppressLint("DefaultLocale")
     fun toString(strMonth: Boolean): String {
-        if (strMonth) return String.format(
-            "%02d %s %04d",
-            this.day, mounths[this.month - 1],
-            this.year
-        )
-        else return toString()
+        return if (strMonth) {
+            String.format(Locale.US, "%02d %s %04d", this.day, mounths[this.month - 1], this.year)
+        } else {
+            toString()
+        }
     }
 
-    /**
-     * Converts Gregorian date to Persian date.
-     * Input: Gregorian year, month, day. Output: Sets Persian date.
-     */
     fun gregorianToPersian(year: Int, month: Int, day: Int) {
         val jd = jG2JD(year, month, day, 0)
         jD2Jal(jd)
@@ -543,17 +417,14 @@ class RoozhDateConverter {
         this.day = jD
     }
 
-    /**
-     * Converts Gregorian date to Persian date.
-     * Input: Date object. Output: Sets Persian date.
-     */
     fun gregorianToPersian(date: Date) {
-        val calender: Calendar = GregorianCalendar()
-        calender.setTime(date)
+        val calender: Calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Tehran"))
+        calender.time = date
         val jd = jG2JD(
-            calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(
-                Calendar.DAY_OF_MONTH
-            ), 0
+            calender.get(Calendar.YEAR),
+            calender.get(Calendar.MONTH) + 1, // Fix: تقویم ماه جاوا از صفر شروع می‌شود
+            calender.get(Calendar.DAY_OF_MONTH),
+            0
         )
         jD2Jal(jd)
         this.year = jY
@@ -561,10 +432,6 @@ class RoozhDateConverter {
         this.day = jD
     }
 
-    /**
-     * Converts Persian date to Gregorian date.
-     * Input: Persian year, month, day. Output: Sets Gregorian date.
-     */
     fun persianToGregorian(year: Int, month: Int, day: Int) {
         val jd = jal2JD(year, month, day)
         jD2JG(jd, 0)
